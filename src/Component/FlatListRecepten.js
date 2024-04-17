@@ -1,69 +1,92 @@
 import React, {useState} from 'react';
+import receptenImage from '../../assets/recepten.jpeg'
 import {
     FlatList,
     SafeAreaView,
     StatusBar,
     StyleSheet,
-    Text,
     TouchableOpacity,
+    Image, Text, View
 } from 'react-native';
 
-const DATA = [
-    {
-        id: '1',
-        title: 'Spaghetti',
-    },
-    {
-        id: '2',
-        title: 'Paella',
-    },
-    {
-        id: '3',
-        title: 'Gambas pil pil',
-    },
-    {
-        id: '4',
-        title: 'Hollands Stamp pot',
-    },
-    {
-        id: '5',
-        title: 'Pannekoek',
-    },
-    {
-        id: '6',
-        title: 'Doner Kebab',
-    },
-    {
-        id: '7',
-        title: 'Pasta Carbonade',
-    },
-];
 
-const Item = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
-        <Text style={[styles.title, {color: textColor}]}>{item.title}</Text>
-    </TouchableOpacity>
-);
 
-const App = () => {
+
+
+
+const FlatListRecepten = ({navigation}) => {
+
+    const DATA = [
+        {
+            id: '1',
+            title: 'Spaghetti',
+            img:receptenImage
+        },
+        {
+            id: '2',
+            title: 'Paella',
+            img:receptenImage
+        },
+        {
+            id: '3',
+            title: 'Gambas pil pil',
+            img:receptenImage
+        },
+        {
+            id: '4',
+            title: 'Hollands Stamp pot',
+            img:receptenImage
+        },
+        {
+            id: '5',
+            title: 'Pannekoek',
+            img:receptenImage
+        },
+        {
+            id: '6',
+            title: 'Doner Kebab',
+            img:receptenImage
+        },
+        {
+            id: '7',
+            title: 'Pasta Carbonade',
+            img:receptenImage
+        },
+    ];
+
+
     const [selectedId, setSelectedId] = useState();
 
     const renderItem = ({item}) => {
-        const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-        const color = item.id === selectedId ? 'white' : 'black';
-
         return (
+            <View>
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
-                backgroundColor={backgroundColor}
-                textColor={color}
+                onPress={() =>
+                    navigation.navigate('ReceptenDetail')
+                }
             />
+            </View>
         );
     };
 
+    const Item = ({item, onPress, backgroundColor,}) => {
+        return(
+        <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
+            <Image
+                style={styles.image}
+                source={item.img}
+            />
+        </TouchableOpacity>
+        )};
+
+
+
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.header} >
+                <Text>Recepten</Text>
+            </View>
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
@@ -82,18 +105,22 @@ const styles = StyleSheet.create({
 
     },
     item: {
-        padding: 20,
+        padding: 10,
         marginVertical: 8,
-        marginHorizontal: 16,
-        borderRadius: 20,
-        height: '50%',
-        width: "auto"
+        marginHorizontal: 4,
     },
-    title: {
-        fontSize: 32,
-        marginTop: 25
+
+
+    image:{
+        width: 150,
+        height: 150,
+        borderRadius: 10
     },
+
+    header:{
+        marginLeft:15,
+    }
 
 });
 
-export default App;
+export default FlatListRecepten;

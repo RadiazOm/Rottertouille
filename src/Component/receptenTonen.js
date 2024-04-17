@@ -1,14 +1,18 @@
 import {StatusBar, StyleSheet, Text, View} from "react-native";
 import Search from "./Search";
 import FlatListRecepten from "./FlatListRecepten";
-
-const ReceptenTonen = () => {
+import  FlatListCulinary from "./FlatListCulinary";
+import ReceptDetails from "./ReceptDetails";
+const ReceptenTonen = ({navigation}) => {
     return(
         <View style={styles.container}>
+            <View>
             <Search/>
-            <Text>Hier de recepten tonen</Text>
-            <FlatListRecepten/>
+            <FlatListRecepten navigation={navigation}/>
+            <FlatListCulinary/>
+            {/*<ReceptDetails/>*/}
             <StatusBar style="auto" />
+            </View>
         </View>
 
     )
@@ -19,8 +23,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: "60%"
     },
 });
+
+
 
 export default ReceptenTonen
