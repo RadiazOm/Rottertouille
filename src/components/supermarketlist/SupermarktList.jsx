@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Text,
     StatusBar, Button, Image, TouchableHighlight, SectionList,
+    Linking
 } from 'react-native';
 // import {Picker} from "@react-native-picker/picker";
 import Lidl  from '../../../assets/Lidl-Logo.svg.png'
@@ -84,6 +85,10 @@ const SuperMarktList = () => {
         setDisplayFilter(!displayFilter);
     }
 
+    function navigateUrl() {
+        Linking.openURL('https://www.google.com/?hl=nl');
+    }
+
     function renderDropdown() {
         if (displayFilter) {
             return (
@@ -124,7 +129,7 @@ const SuperMarktList = () => {
             <FlatList className={"mt-10"}
                 data={DATA}
                 horizontal={true}
-                renderItem={({item}) => <Supermarkt img={item.img}/>}
+                      renderItem={({item}) => <TouchableHighlight className={""} onPress={navigateUrl}><Supermarkt img={item.img}/></TouchableHighlight>}
                 keyExtractor={item => item.id}
             />
         </SafeAreaView>
