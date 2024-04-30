@@ -22,17 +22,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginTop: "20%",
         width: 350,
+        marginLeft: 15,
 
     },
 
     input: {
         height: 40,
-        borderStartWidth: 3,
+        borderColor: '#F16060',
         margin: 12,
-        borderWidth: 1,
+        borderWidth: 3,
         padding: 10,
-        borderRadius: 10,
-        textAlign: "center",
+        borderRadius: 11,
+        textAlign: "left",
         color: "grey",
     },
 });
