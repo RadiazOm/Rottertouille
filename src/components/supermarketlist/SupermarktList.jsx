@@ -9,7 +9,7 @@ import {
     Linking
 } from 'react-native';
 // import {Picker} from "@react-native-picker/picker";
-import Lidl  from '../../../assets/Lidl-Logo.svg.png'
+import Lidl from '../../../assets/Lidl-Logo.svg.png'
 import Jumbo from '../../../assets/Jumbo_Logo.svg.png'
 import Filter from '../../../assets/filter.png';
 import Supermarkt from "./Supermarkt";
@@ -66,28 +66,28 @@ const filterOptions = [
     },
 ];
 
-const SuperMarktList = () => {
+const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
-    const countryData=["test, test2"];
-    const [stateData, setStateData] = useState([]);
-    const [cityData, setCityData] = useState([]);
-    const [country, setCountry] = useState(null);
-    const [state, setState] = useState(null);
-    const [city, setCity] = useState(null);
-    const [countryName, setCountryName] = useState(null);
-    const [stateName, setStateName] = useState(null);
-    const [cityName, setCityName] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
-    const [Enable , setEnable]  = useState("courses");
+    // const countryData=["test, test2"];
+    // const [stateData, setStateData] = useState([]);
+    // const [cityData, setCityData] = useState([]);
+    // const [country, setCountry] = useState(null);
+    // const [state, setState] = useState(null);
+    // const [city, setCity] = useState(null);
+    // const [countryName, setCountryName] = useState(null);
+    // const [stateName, setStateName] = useState(null);
+    // const [cityName, setCityName] = useState(null);
+    // const [isFocus, setIsFocus] = useState(false);
+    // const [Enable , setEnable]  = useState("courses");
 
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
     }
 
-    function navigateUrl() {
-        Linking.openURL('https://www.google.com/?hl=nl');
-    }
+    // function navigateUrl() {
+    //   navigation.navigate('Product')
+    // }
 
     function renderDropdown() {
         if (displayFilter) {
@@ -127,10 +127,12 @@ const SuperMarktList = () => {
                 </View>
             </View>
             <FlatList className={"mt-10"}
-                data={DATA}
-                horizontal={true}
-                      renderItem={({item}) => <TouchableHighlight className={""} onPress={navigateUrl}><Supermarkt img={item.img}/></TouchableHighlight>}
-                keyExtractor={item => item.id}
+                      data={DATA}
+                      horizontal={true}
+                      renderItem={({item}) => <TouchableHighlight className={""}
+                                                                  onPress={() => navigation.navigate('Product')}><Supermarkt
+                          img={item.img}/></TouchableHighlight>}
+                      keyExtractor={item => item.id}
             />
         </SafeAreaView>
     );

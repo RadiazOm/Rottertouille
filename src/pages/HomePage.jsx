@@ -1,10 +1,13 @@
 import SupermarktList from "../components/supermarketlist/SupermarktList";
+import {Text, View} from "react-native";
 
-export default function HomePage () {
+export default function HomePage ({navigation}) {
 
     return(
         <>
-            <SupermarktList/>
+            <View>
+                <SupermarktList navigation={navigation}/>
+            </View>
         </>
     )
 }
