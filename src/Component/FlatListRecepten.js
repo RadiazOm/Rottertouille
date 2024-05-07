@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import receptenImage from '../../assets/recepten.jpeg'
+import moreButton from '../../assets/morebutton.png'
 import {
     FlatList,
     SafeAreaView,
@@ -52,20 +53,27 @@ const FlatListRecepten = ({navigation}) => {
             title: 'Pasta Carbonade',
             img:receptenImage
         },
+        {
+            id: '8',
+            title: 'More',
+            img:moreButton
+        }
     ];
 
 
     const [selectedId, setSelectedId] = useState();
 
     const renderItem = ({item}) => {
+        const navigateToDetail = () => {
+            if (item.id !== '8') {
+                navigation.navigate('ReceptenDetail', { itemId: item.id });
+            } else {
+                navigation.navigate('AllRecepten'); // Navigate to a different component for "More"
+            }
+        };
         return (
             <View>
-            <Item
-                item={item}
-                onPress={() =>
-                    navigation.navigate('ReceptenDetail')
-                }
-            />
+                <Item item={item} onPress={navigateToDetail} />
             </View>
         );
     };

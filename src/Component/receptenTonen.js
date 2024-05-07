@@ -2,9 +2,12 @@ import {StatusBar, StyleSheet, Text, View} from "react-native";
 import Search from "./Search";
 import FlatListRecepten from "./FlatListRecepten";
 import  FlatListCulinary from "./FlatListCulinary";
-import ReceptDetails from "./ReceptDetails";
+
 
 const ReceptenTonen = ({navigation}) => {
+
+
+
     return(
         <View style={styles.container}>
             <View>
