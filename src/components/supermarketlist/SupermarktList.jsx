@@ -13,6 +13,7 @@ import Lidl from '../../../assets/Lidl-Logo.svg.png'
 import Jumbo from '../../../assets/Jumbo_Logo.svg.png'
 import Filter from '../../../assets/filter.png';
 import Supermarkt from "./Supermarkt";
+// import useFetch from "../../hooks/useFetch";
 
 const DATA = [
     {
