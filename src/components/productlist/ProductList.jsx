@@ -1,9 +1,20 @@
 import {FlatList, SafeAreaView, Text, TouchableHighlight, View} from "react-native";
 import Product from "./Product";
+import useFetch from "../../hooks/useFetch";
 import ProductImage from '../../../assets/brood.jpg'
 import Supermarkt from "../supermarketlist/Supermarkt";
 
+
 function ProductList() {
+
+   //  const {products} = useFetch('http://localhost:8000/supermarkets');
+   // console.log(products);
+
+    fetch("http://localhost:8000/products").then((response) => {
+        response.json().then((response) => {
+            console.log(response)
+        })
+    })
 
     const data = [
         {
