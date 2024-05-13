@@ -71,32 +71,19 @@ const Item = ({item, onPress}) => (
 const AllRecepten = () => {
     const [selectedId, setSelectedId] = useState();
 
-    const renderPair = (startIdx) => {
-        return (
-            <View style={styles.pairContainer}>
-                <Item item={receptenData[startIdx]} onPress={() => setSelectedId(receptenData[startIdx].id)}/>
-                {receptenData[startIdx + 1] && (
-                    <Item item={receptenData[startIdx + 1]}
-                          onPress={() => setSelectedId(receptenData[startIdx + 1].id)}/>                    // hulp van chatgpt gevraagd niet boos worden jeffrey
-                )}
-            </View>
-        );
-    };
-
-    const renderItem = () => {
-        return (
-            <FlatList
-
-                data={Array(Math.ceil(receptenData.length / 2)).fill().map((_, index) => index * 2)}
-                keyExtractor={(item) => item.toString()}
-                renderItem={({item}) => renderPair(item)}
-            />
-        );
-    };
+    const renderItem = ({item}) => (
+        <Item item={item} onPress={() => setSelectedId(item.id)}/>
+    );
 
     return (
         <SafeAreaView style={styles.container}>
-            {renderItem()}
+            <Search style={styles.searchbar}/>
+            <FlatList style={styles.flatList}
+                data={receptenData}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderItem}
+                numColumns={2}
+            />
         </SafeAreaView>
     );
 };
@@ -104,23 +91,15 @@ const AllRecepten = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 20,
+        marginTop: StatusBar.currentHeight || 5,
     },
+
     itemContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: '20%'
-    },
-    pairContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginBottom: 20,
-    },
-    item: {
-        padding: 20,
-        marginVertical: 7,
-        marginHorizontal: 14,
+        marginTop: "20%",
+        width: "50%",
     },
     title: {
         fontSize: 16,
@@ -132,9 +111,12 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 10,
     },
-
     searchbar: {
-        margin: 15
+        margin: 15,
+    },
+
+    flatList: {
+        marginTop:60
     }
 });
 
