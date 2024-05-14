@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import {
     FlatList,
     SafeAreaView,
@@ -7,8 +7,6 @@ import {
     TouchableOpacity,
     Image, Text, View
 } from "react-native";
-
-
 
 
 const DATA = [
@@ -49,53 +47,52 @@ const DATA = [
 ];
 
 
-    const Item = ({item, onPress,}) => (
-        <TouchableOpacity onPress={onPress} style={styles.item} >
-            <Text>{item.culinary}</Text>
-        </TouchableOpacity>
-    );
+const Item = ({item, onPress,}) => (
+    <TouchableOpacity onPress={onPress} style={styles.item}>
+        <Text>{item.culinary}</Text>
+    </TouchableOpacity>
+);
 
-    const FlatListCulinary = () => {
-        const [selectedId, setSelectedId] = useState();
+const FlatListCulinary = () => {
+    const [selectedId, setSelectedId] = useState();
 
-        const renderItem = ({item}) => {
-            return (
-                <Item
+    const renderItem = ({item}) => {
+        return (
+            <Item
                 item={item}
                 onPress={() => setSelectedId(item.id)}
-                />
-            );
-        };
-
-        return (
-            <SafeAreaView style={styles.container}>
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    extraData={selectedId}
-                    horizontal={true}
-                    />
-            </SafeAreaView>
+            />
         );
     };
 
-
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            marginTop: StatusBar.currentHeight || 0,
-        },
-
-        item: {
-            padding: 8,
-            marginVertical: 4,
-            marginHorizontal: 4,
-            marginLeft: 7
-        },
-
+    return (
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={DATA}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                extraData={selectedId}
+                horizontal={true}
+            />
+        </SafeAreaView>
+    );
+};
 
 
-    })
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+    },
+
+    item: {
+        padding: 8,
+        marginVertical: 4,
+        marginHorizontal: 4,
+        marginLeft: 7
+    },
+
+
+})
 
 export default FlatListCulinary;

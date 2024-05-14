@@ -79,10 +79,10 @@ const AllRecepten = () => {
         <SafeAreaView style={styles.container}>
             <Search style={styles.searchbar}/>
             <FlatList style={styles.flatList}
-                data={receptenData}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
-                numColumns={2}
+                      data={receptenData}
+                      keyExtractor={(item) => item.id.toString()}
+                      renderItem={renderItem}
+                      numColumns={2}
             />
         </SafeAreaView>
     );
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     flatList: {
-        marginTop:60
+        marginTop: 60
     }
 });
 

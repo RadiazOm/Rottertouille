@@ -11,52 +11,48 @@ import {
 } from 'react-native';
 
 
-
-
-
-
 const FlatListRecepten = ({navigation}) => {
 
     const DATA = [
         {
             id: '1',
             title: 'Spaghetti',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '2',
             title: 'Paella',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '3',
             title: 'Gambas pil pil',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '4',
             title: 'Hollands Stamp pot',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '5',
             title: 'Pannekoek',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '6',
             title: 'Doner Kebab',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '7',
             title: 'Pasta Carbonade',
-            img:receptenImage
+            img: receptenImage
         },
         {
             id: '8',
             title: 'More',
-            img:moreButton
+            img: moreButton
         }
     ];
 
@@ -66,33 +62,33 @@ const FlatListRecepten = ({navigation}) => {
     const renderItem = ({item}) => {
         const navigateToDetail = () => {
             if (item.id !== '8') {
-                navigation.navigate('ReceptenDetail', { itemId: item.id });
+                navigation.navigate('ReceptenDetail', {itemId: item.id});
             } else {
                 navigation.navigate('AllRecepten'); // Navigate to a different component for "More"
             }
         };
         return (
             <View>
-                <Item item={item} onPress={navigateToDetail} />
+                <Item item={item} onPress={navigateToDetail}/>
             </View>
         );
     };
 
     const Item = ({item, onPress, backgroundColor,}) => {
-        return(
-        <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
-            <Image
-                style={styles.image}
-                source={item.img}
-            />
-        </TouchableOpacity>
-        )};
-
+        return (
+            <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
+                <Image
+                    style={styles.image}
+                    source={item.img}
+                />
+            </TouchableOpacity>
+        )
+    };
 
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header} >
+            <View style={styles.header}>
                 <Text>Recepten</Text>
             </View>
             <FlatList
@@ -119,14 +115,14 @@ const styles = StyleSheet.create({
     },
 
 
-    image:{
+    image: {
         width: 150,
         height: 150,
         borderRadius: 10
     },
 
-    header:{
-        marginLeft:15,
+    header: {
+        marginLeft: 15,
     }
 
 });

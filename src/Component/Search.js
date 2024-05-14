@@ -1,4 +1,4 @@
-import {TextInput, View, StyleSheet, } from 'react-native'
+import {TextInput, View, StyleSheet,} from 'react-native'
 import React from 'react';
 
 function Search() {

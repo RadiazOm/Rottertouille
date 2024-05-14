@@ -1,40 +1,45 @@
 import React from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Button, Pressable, Alert} from "react-native";
 import image from '../../assets/recepten.jpeg';
-import FlatListRecepten from "./FlatListRecepten";
+
 
 
 const ReceptDetails = () => {
 
     const groceries = [
-        {   name: 'Worst',
+        {
+            name: 'Worst',
             price: '€2,00',
             price2: '€1,00'
         },
 
-        {   name: 'Ham',
+        {
+            name: 'Ham',
             price: '€2,00',
             price2: '€1,00'
         },
 
-        {   name: 'Cheese',
+        {
+            name: 'Cheese',
             price: '€2,00',
             price2: '€1,00'
         },
 
-        {   name: 'Potatoes',
+        {
+            name: 'Potatoes',
             price: '€2,00',
             price2: '€1,00'
         },
 
-        {   name: 'Total',
+        {
+            name: 'Total',
             price: '€8,00',
             price2: '€4,00'
         },
     ];
     return (
         <ScrollView>
-            <Image source={image} style={styles.receiptImage} />
+            <Image source={image} style={styles.receiptImage}/>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
                 {/* Edit button */}
@@ -51,12 +56,12 @@ const ReceptDetails = () => {
                 ))}
             </View>
             <View style={styles.buttonContainer}>
-            <Button style={styles.button1}
-                onPress={() => {
-                    console.log('You tapped the button!');
-                }}
-                title="Instructies"
-            />
+                <Button style={styles.button1}
+                        onPress={() => {
+                            console.log('You tapped the button!');
+                        }}
+                        title="Instructies"
+                />
             </View>
             <View style={styles.buttonContainer}>
                 <Button style={styles.button2}
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        backgroundColor:  '#F16060',
+        backgroundColor: '#F16060',
         borderRadius: 20,
         width: 200,
     },
@@ -131,9 +136,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
 
-    button2: {
-
-    }
+    button2: {}
 });
 
 export default ReceptDetails;
