@@ -11,7 +11,7 @@ const useFetch = (url) => {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    setData(data)
+                    setData(data.products)
                 }).catch((error) => (console.log(error)))
         };
         fetchData()
