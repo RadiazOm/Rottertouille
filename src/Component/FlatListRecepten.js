@@ -76,12 +76,14 @@ const FlatListRecepten = ({navigation}) => {
 
     const Item = ({item, onPress, backgroundColor,}) => {
         return (
+            <View>
             <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
                 <Image
                     style={styles.image}
                     source={item.img}
                 />
             </TouchableOpacity>
+            </View>
         )
     };
 
@@ -105,7 +107,7 @@ const FlatListRecepten = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
+        marginTop: StatusBar.currentHeight || 10,
 
     },
     item: {
