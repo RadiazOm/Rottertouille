@@ -92,7 +92,9 @@ const DATA = [
             marginVertical: 4,
             marginHorizontal: 4,
             marginLeft: 7
-        }
+        },
+
+
 
     })
 
