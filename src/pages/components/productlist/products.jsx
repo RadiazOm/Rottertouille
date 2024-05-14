@@ -12,6 +12,10 @@ const Products = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Producten</Text>
+        <Text style={styles.filter}>Filter</Text>
+      </View>
       <FlatList
         data={products}
         horizontal={true}
@@ -37,6 +41,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 22
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    marginTop: 20
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'gray',
+  },
+  filter: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'gray',
   },
   item: {
     padding: 10,
