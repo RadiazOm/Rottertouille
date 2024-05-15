@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {View, Text, StyleSheet, SafeAreaView, FlatList, StatusBar, TouchableOpacity, Image} from "react-native";
-import Search from "./Search";
-import image from '../../assets/recepten.jpeg';
+import Search from "../common/search/Search";
+import image from '../../../assets/recepten.jpeg';
 
 const receptenData = [
     {

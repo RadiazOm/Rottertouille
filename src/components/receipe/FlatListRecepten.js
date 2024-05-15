@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import receptenImage from '../../assets/recepten.jpeg'
-import moreButton from '../../assets/morebutton.png'
+import receptenImage from '../../../assets/recepten.jpeg'
+import moreButton from '../../../assets/morebutton.png'
 import {
     FlatList,
     SafeAreaView,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 
-const FlatListRecepten = ({navigation}) => {
+function FlatListRecepten({navigation})  {
 
     const DATA = [
         {
@@ -89,7 +89,7 @@ const FlatListRecepten = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView className={"flex flex-col bg-red-200"}>
             <View style={styles.header}>
                 <Text>Recepten</Text>
             </View>

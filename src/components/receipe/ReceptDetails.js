@@ -1,6 +1,6 @@
 import React from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Button, Pressable, Alert} from "react-native";
-import image from '../../assets/recepten.jpeg';
+import image from '../../../assets/recepten.jpeg';
 
 
 

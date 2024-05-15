@@ -11,8 +11,8 @@ const Products = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View>
+      <View>
         <Text style={styles.title}>Producten</Text>
         <Text style={styles.filter}>Filter</Text>
       </View>
