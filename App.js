@@ -19,8 +19,9 @@ export default function App() {
                     component={HomePage}
                 />
                 <Stack.Screen
-                    name="Product"
+                    name="SupermarketProducts"
                     component={ProductPage}
+
                 />
 
                 <Stack.Screen

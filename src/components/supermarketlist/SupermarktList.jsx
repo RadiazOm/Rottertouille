@@ -70,25 +70,10 @@ const filterOptions = [
 const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
-    // const countryData=["test, test2"];
-    // const [stateData, setStateData] = useState([]);
-    // const [cityData, setCityData] = useState([]);
-    // const [country, setCountry] = useState(null);
-    // const [state, setState] = useState(null);
-    // const [city, setCity] = useState(null);
-    // const [countryName, setCountryName] = useState(null);
-    // const [stateName, setStateName] = useState(null);
-    // const [cityName, setCityName] = useState(null);
-    // const [isFocus, setIsFocus] = useState(false);
-    // const [Enable , setEnable]  = useState("courses");
 
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
     }
-
-    // function navigateUrl() {
-    //   navigation.navigate('Product')
-    // }
 
     function renderDropdown() {
         if (displayFilter) {
@@ -131,7 +116,7 @@ const SuperMarktList = ({navigation}) => {
                       data={DATA}
                       horizontal={true}
                       renderItem={({item}) => <TouchableHighlight className={""}
-                                                                  onPress={() => navigation.navigate('Product')}><Supermarkt
+                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.title, img:item.img})}><Supermarkt
                           img={item.img}/></TouchableHighlight>}
                       keyExtractor={item => item.id}
             />
