@@ -27,7 +27,7 @@ const Products = () => {
             <Image
               style={styles.tinyLogo}
               source={{
-                uri: item.image_url,
+                uri: 'http://89.33.85.29:1068/image/' + item.image_url,
               }}
             />
           </View>
@@ -53,11 +53,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'gray',
   },
+
   filter: {
     fontSize: 16,
     fontWeight: 'bold',
     color: 'gray',
   },
+
+
   item: {
     padding: 10,
     fontSize: 18,
@@ -66,8 +69,8 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: 100,
+    height:250,
   },
 });
 

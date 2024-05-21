@@ -5,15 +5,16 @@ import FlatListRecepten from "../components/receipe/FlatListRecepten";
 import FlatListCulinary from "../components/receipe/FlatListCulinary";
 import Products from "../components/productlisthome/Products";
 
-export default function HomePage ({navigation}) {
+export default function HomePage({navigation}) {
 
-    return(
+    return (
         <>
             <View>
                 <Search/>
-                <SupermarktList navigation={navigation}/>
-               <Products/>
                 <FlatListRecepten navigation={navigation}/>
+                <Products/>
+                <SupermarktList navigation={navigation}/>
+
             </View>
         </>
     )

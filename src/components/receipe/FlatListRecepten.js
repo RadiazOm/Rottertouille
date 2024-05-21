@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     item: {
         padding: 10,
         marginVertical: 8,
-        marginHorizontal: 4,
+        marginHorizontal: 1,
     },
 
 
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
 
     header: {
         marginLeft: 15,
+        marginTop:60
     }
 
 });
