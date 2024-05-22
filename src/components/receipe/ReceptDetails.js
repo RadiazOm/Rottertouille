@@ -39,11 +39,11 @@ const ReceptDetails = () => {
     ];
     return (
         <ScrollView>
-            <Image source={image} style={styles.receiptImage}/>
+            <Image source={image} style={styles.receiptImage} />
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
-                {/* Edit button */}
             </View>
+            <View style={styles.divider} />
             <View style={styles.groceryList}>
                 {groceries.map((grocery, index) => (
                     <View key={index} style={styles.groceryItem}>
@@ -55,23 +55,27 @@ const ReceptDetails = () => {
                     </View>
                 ))}
             </View>
+            <View style={styles.divider} />
             <View style={styles.buttonContainer}>
-                <Button style={styles.button1}
-                        onPress={() => {
-                            console.log('You tapped the button!');
-                        }}
-                        title="Instructies"
-                />
+                <Pressable
+                    style={styles.button1}
+                    onPress={() => {
+                        console.log('You tapped the button!');
+                    }}
+                >
+                    <Text style={styles.buttonText1}>Instructies</Text>
+                </Pressable>
             </View>
             <View style={styles.buttonContainer}>
-                <Button style={styles.button2}
-                        onPress={() => {
-                            console.log('You tapped the button!');
-                        }}
-                        title="Voeg toe aan lijst"
-                />
+                <Pressable
+                    style={styles.button2}
+                    onPress={() => {
+                        console.log('You tapped the button!');
+                    }}
+                >
+                    <Text style={styles.buttonText2}>Voeg toe aan lijst</Text>
+                </Pressable>
             </View>
-
         </ScrollView>
     );
 };
@@ -101,6 +105,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 5,
+        padding: 5,
     },
     groceryName: {
         fontWeight: "bold",
@@ -108,35 +113,53 @@ const styles = StyleSheet.create({
     priceContainer: {
         flexDirection: "column",
         alignItems: "center",
-        padding: 3
+        padding: 3,
     },
     oldPrice: {
         textDecorationLine: "line-through",
         color: "gray",
         marginRight: 5,
-        marginBottom: 6
+        marginBottom: 6,
     },
     newPrice: {
         fontWeight: "bold",
-
     },
-
+    divider: {
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+        marginVertical: 10,
+        marginHorizontal: 5,
+        width: 300,
+        marginLeft: '10%',
+    },
     buttonContainer: {
-        marginTop: 20,
-        marginLeft: '23%',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        backgroundColor: '#F16060',
         borderRadius: 20,
         width: 200,
+        alignSelf: 'center',
     },
-
     button1: {
-        color: 'white'
+        backgroundColor: '#F16060',
+        borderRadius: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
-
-    button2: {}
+    button2: {
+        backgroundColor: '#4F4F4F',
+        borderRadius: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    buttonText1: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    buttonText2: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
 });
 
 export default ReceptDetails;

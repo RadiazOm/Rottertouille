@@ -71,48 +71,44 @@ const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
 
+
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
     }
 
-    function renderDropdown() {
-        if (displayFilter) {
-            return (
-                <View className={"bg-white divide-y divide-gray-100 rounded-lg h-40 mt-4 shadow w-44 dark:bg-gray-700"}>
-                    <SectionList
-                        sections={filterOptions}
-                        keyExtractor={(item, index) => item + index}
-                        renderItem={({item}) => (
-                            <View>
-                                <Text>{item}</Text>
-                            </View>
-                        )}
-                        renderSectionHeader={({section: {title}}) => (
-                            <Text className={"font-bold"}>{title}</Text>
-                        )}
-                    />
-                </View>
-            )
-        }
-    }
-
-    // function openFilter() {
-    // setDisplayFilter(true);
-    // alert(displayFilter);
+    // function navigateUrl() {
+    //   navigation.navigate('Product')
     // }
+
+    // function renderDropdown() {
+    //     if (displayFilter) {
+    //         return (
+    //             <View className={"bg-white divide-y divide-gray-100 rounded-lg h-40 mt-4 shadow w-44 dark:bg-gray-700"}>
+    //                 <SectionList
+    //                     sections={filterOptions}
+    //                     keyExtractor={(item, index) => item + index}
+    //                     renderItem={({item}) => (
+    //                         <View>
+    //                             <Text>{item}</Text>
+    //                         </View>
+    //                     )}
+    //                     renderSectionHeader={({section: {title}}) => (
+    //                         <Text className={"font-bold"}>{title}</Text>
+    //                     )}
+    //                 />
+    //             </View>
+    //         )
+    //     }
+    // }
+
     return (
         <SafeAreaView>
-            <View className={"pl-7 pr-8 flex content-between flex-row"}>
+            <View className={"pl-3 pr-8 flex content-between flex-row"}>
                 <View className={"flex-1"}>
-                    <Text className={"text-2xl"}>Supermarkt</Text>
-                </View>
-                <View className={"relative"}>
-                    <TouchableHighlight onPress={toggleDropDown}><Image className={" block left-28"}
-                                                                        source={require('../../../assets/filter.png')}/></TouchableHighlight>
-                    {renderDropdown()}
+                    <Text style={styles.supermarktTitle}>Supermarkt</Text>
                 </View>
             </View>
-            <FlatList className={"mt-10"}
+            <FlatList className={"mt-3"}
                       data={DATA}
                       horizontal={true}
                       renderItem={({item}) => <TouchableHighlight className={""}
@@ -124,4 +120,12 @@ const SuperMarktList = ({navigation}) => {
     );
 };
 
+const styles = StyleSheet.create({
+    supermarktTitle: {
+        marginTop: 15,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'gray',
+    }
+})
 export default SuperMarktList;
