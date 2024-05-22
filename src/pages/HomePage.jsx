@@ -1,5 +1,5 @@
 import SupermarktList from "../components/supermarketlist/SupermarktList";
-import {Text, View} from "react-native";
+import {Text, StyleSheet, View, ScrollView} from "react-native";
 import Search from "../components/common/search/Search";
 import FlatListRecepten from "../components/receipe/FlatListRecepten";
 import Supermarkt from "../components/supermarketlist/Supermarkt";
@@ -12,15 +12,25 @@ export default function HomePage({navigation}) {
 
     return (
         <>
-            <View>
-                <Search/>
-                <FlatListRecepten navigation={navigation}/>
-                <FlatListCulinary/>
-                <Products/>
-                <SupermarktList navigation={navigation}/>
+            <View className={"mb-14 pt-5"}>
+                <ScrollView>
+                    <Search/>
+                    <FlatListRecepten navigation={navigation}/>
+                    <FlatListCulinary/>
+                    <Products/>
+                    <SupermarktList navigation={navigation}/>
+                </ScrollView>
 
-                <Navbar navigation={navigation}/>
+    <Navbar navigation={navigation}/>
             </View>
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginBottom: 100,
+        height:400
+    }
+})

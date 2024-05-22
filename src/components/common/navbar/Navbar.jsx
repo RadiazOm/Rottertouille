@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
     box: {
         height:75,
-        marginBottom:30,
+        marginBottom:5,
         justifyContent: 'center',
         alignItems: 'center',
     },

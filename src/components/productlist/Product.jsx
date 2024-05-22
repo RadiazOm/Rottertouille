@@ -53,10 +53,8 @@ const Product = ({title, price, discount, img}) => {
         // }).catch((e) => {
         //     console.log("the error is" + e);
         // })
-        AsyncStorage.setItem("products", JSON.stringify(product), ()=> {
-            AsyncStorage.getItem('products', (err, result) => {
-                console.log(result);
-            })
+        AsyncStorage.setItem("products", JSON.stringify(list), ()=> {
+
         })
 
     }
