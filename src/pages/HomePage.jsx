@@ -12,6 +12,7 @@ export default function HomePage({navigation}) {
             <View>
                 <Search/>
                 <FlatListRecepten navigation={navigation}/>
+                <FlatListCulinary/>
                 <Products/>
                 <SupermarktList navigation={navigation}/>
 

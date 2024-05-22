@@ -91,7 +91,7 @@ function FlatListRecepten({navigation})  {
     return (
         <SafeAreaView className={"flex flex-col bg-red-200"}>
             <View style={styles.header}>
-                <Text>Recepten</Text>
+                <Text style={styles.Recepten}>Recepten</Text>
             </View>
             <FlatList
                 data={DATA}
@@ -110,6 +110,14 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight || 10,
 
     },
+
+    Recepten:{
+        marginTop:5,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'gray',
+    },
+
     item: {
         padding: 10,
         marginVertical: 8,
@@ -118,8 +126,8 @@ const styles = StyleSheet.create({
 
 
     image: {
-        width: 150,
-        height: 150,
+        width: 135,
+        height: 135,
         borderRadius: 10
     },
 

@@ -91,19 +91,18 @@ const AllRecepten = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 5,
     },
 
     itemContainer: {
         flex: 1,
+        marginBottom:20,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "20%",
         width: "50%",
     },
     title: {
         fontSize: 16,
-        marginTop: 10,
+        marginTop: 5,
         textAlign: "center",
     },
     image: {
@@ -116,7 +115,8 @@ const styles = StyleSheet.create({
     },
 
     flatList: {
-        marginTop: 60
+        marginTop: 70,
+        margin:10
     }
 });
 

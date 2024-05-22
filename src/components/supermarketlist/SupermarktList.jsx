@@ -70,17 +70,7 @@ const filterOptions = [
 const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
-    // const countryData=["test, test2"];
-    // const [stateData, setStateData] = useState([]);
-    // const [cityData, setCityData] = useState([]);
-    // const [country, setCountry] = useState(null);
-    // const [state, setState] = useState(null);
-    // const [city, setCity] = useState(null);
-    // const [countryName, setCountryName] = useState(null);
-    // const [stateName, setStateName] = useState(null);
-    // const [cityName, setCityName] = useState(null);
-    // const [isFocus, setIsFocus] = useState(false);
-    // const [Enable , setEnable]  = useState("courses");
+
 
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
@@ -113,12 +103,12 @@ const SuperMarktList = ({navigation}) => {
 
     return (
         <SafeAreaView>
-            <View className={"pl-5 pr-8 flex content-between flex-row"}>
+            <View className={"pl-3 pr-8 flex content-between flex-row"}>
                 <View className={"flex-1"}>
-                    <Text className={"text mt-10"}>Supermarkt</Text>
+                    <Text style={styles.supermarktTitle}>Supermarkt</Text>
                 </View>
             </View>
-            <FlatList className={"mt-5"}
+            <FlatList className={"mt-3"}
                       data={DATA}
                       horizontal={true}
                       renderItem={({item}) => <TouchableHighlight className={""}
@@ -130,4 +120,12 @@ const SuperMarktList = ({navigation}) => {
     );
 };
 
+const styles = StyleSheet.create({
+    supermarktTitle: {
+        marginTop: 15,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'gray',
+    }
+})
 export default SuperMarktList;

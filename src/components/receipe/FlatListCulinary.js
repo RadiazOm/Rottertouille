@@ -80,19 +80,13 @@ const FlatListCulinary = () => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-    },
-
     item: {
-        padding: 8,
-        marginVertical: 4,
-        marginHorizontal: 4,
-        marginLeft: 7
-    },
-
-
+        padding: 2,
+        marginVertical: 2,
+        marginHorizontal: 8,
+        marginLeft: 7,
+        marginBottom:20
+    }
 })
 
 export default FlatListCulinary;
