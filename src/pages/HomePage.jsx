@@ -6,6 +6,7 @@ import Supermarkt from "../components/supermarketlist/Supermarkt";
 import FlatListCulinary from "../components/receipe/FlatListCulinary";
 import Products from "../components/productlisthome/Products";
 import ModalProductDetail from "../components/common/modal/ModalProductDetail";
+import Navbar from "../components/common/navbar/Navbar";
 
 export default function HomePage ({navigation}) {
     return(
@@ -15,6 +16,7 @@ export default function HomePage ({navigation}) {
                         <SupermarktList navigation={navigation}/>
                <Products/>
                 <FlatListRecepten navigation={navigation}/>
+                <Navbar navigation={navigation}/>
             </View>
         </>
     )
