@@ -4,42 +4,47 @@ import receptenTonen from "./src/components/receipe/receptenTonen";
 import ReceptDetails from "./src/components/receipe/ReceptDetails";
 import AllRecepten from "./src/components/receipe/AllRecepten";
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, View} from 'react-native';;
+import {StyleSheet, Text, View} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
+import LandingPage from "./src/pages/LandingPage";
+import {useState} from "react";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
+    const[isShowSplash, setisShowSplash] = useState(true);
     return (
+        <>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen
+                        name="Home"
+                        component={HomePage}
+                    />
+                    <Stack.Screen
+                        name="Product"
+                        component={ProductPage}
+                    />
 
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Home"
-                    component={HomePage}
-                />
-                <Stack.Screen
-                    name="Product"
-                    component={ProductPage}
-                />
+                    <Stack.Screen
+                        name={'Recepten'}
+                        component={receptenTonen}
+                        headerShown={false}
+                    />
 
-                <Stack.Screen
-                    name={'Recepten'}
-                    component={receptenTonen}
-                    headerShown={false}
-                />
+                    <Stack.Screen
+                        name={'ReceptenDetail'}
+                        component={ReceptDetails}
 
-                <Stack.Screen
-                    name={'ReceptenDetail'}
-                    component={ReceptDetails}
-
-                />
-                <Stack.Screen
-                    name={'AllRecepten'}
-                    component={AllRecepten}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+                    />
+                    <Stack.Screen
+                        name={'AllRecepten'}
+                        component={AllRecepten}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        {isShowSplash ? (<LandingPage/>) : (<HomePage/>)}
+        </>
     );
 }
 
