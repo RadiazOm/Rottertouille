@@ -4,74 +4,50 @@ import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ModalProductDetail from "../common/modal/ModalProductDetail";
 import {useState} from "react";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 const Product = ({title, price, discount, img}) => {
     const [showModal, setShowModal] = useState(false);
-    const [list, setList] = useState([]);
     const newPrice = price - discount;
 
     const product = {
         title: title,
         price: price,
-        discount:discount
+        discount: discount
     }
 
-    const storage = new Storage({
-        // maximum capacity, default 1000 key-ids
-        size: 1000,
 
-        // Use AsyncStorage for RN apps, or window.localStorage for web apps.
-        // If storageBackend is not set, data will be lost after reload.
-        storageBackend: AsyncStorage, // for web: window.localStorage
-
-        // expire time, default: 1 day (1000 * 3600 * 24 milliseconds).
-        // can be null, which means never expire.
-        defaultExpires: null,
-
-        // cache data in the memory. default is true.
-        enableCache: true,
-
-        // if data was not found in storage or expired data was found,
-        // the corresponding sync method will be invoked returning
-        // the latest data.
-        sync: {
-            // we'll talk about the details later.
+    async function storeProductsAsync() {
+        try {
+            let storage = await AsyncStorage.getItem("products")
+            let parsedList = JSON.parse(storage)
+            if (storage == null) {
+                parsedList = []
+            }
+            parsedList.push(product);
+            let stringifiedList = JSON.stringify(parsedList);
+            await AsyncStorage.setItem("products", stringifiedList)
+        } catch (e) {
+            console.log(e)
         }
-    });
-    let storageId = Math.random();
-    function addToList() {
-        // storage.save({
-        //     key: 'products',
-        //     id: '1001',
-        //     data: product,
-        //     expires: null
-        // });
-        // storage.load({
-        //
-        // }).then(ret => {
-        //     console.log(ret.id)
-        // }).catch((e) => {
-        //     console.log("the error is" + e);
-        // })
-        AsyncStorage.setItem("products", JSON.stringify(list), ()=> {
-
-        })
 
     }
-    return(
+
+    return (
         <>
-                <View className={"mt-3 ml-0 pr-5 h-36"}>
-                    <Image className={"rounded h-25 w-25"} source={ProductImage}/>
+            <View className={"mt-3 ml-0 pr-5 h-36"}>
+                <Image className={"rounded h-25 w-25"} source={ProductImage}/>
+            </View>
+            <View className={"flex m-2 flex-col"}>
+                <Text className={""}>{title}</Text>
+                <Text className={"line-through flex-row"}>€{Math.round(price * 100) / 100}</Text>
+                <Text className={"flex-row"}>€ {Math.round(newPrice * 100) / 100}</Text>
+                <View className={"flex"}>
+                    <Button onPress={storeProductsAsync} title={"Add to list"}
+                            classname={"w-20 bg-primaryColor h-20"}></Button>
+                    <Text>{discount}</Text>
                 </View>
-                <View className={"flex m-2 flex-col"}>
-                    <Text className={""}>{title}</Text>
-                    <Text className={"line-through flex-row"}>€{Math.round(price * 100) / 100}</Text>
-                    <Text className={"flex-row"}>€ {Math.round(newPrice * 100) / 100}</Text>
-                    <View className={"flex"}>
-                        <Button onPress={addToList} title={"Add to list"} classname={"w-20 bg-primaryColor h-20"}></Button>
-                        <Text>{discount}</Text>
-                    </View>
-                </View>
+            </View>
         </>
     )
 }
