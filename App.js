@@ -8,51 +8,69 @@ import {StyleSheet, Text, View} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
 import LandingPage from "./src/pages/LandingPage";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import ShoppingListPage from "./src/pages/ShoppingListPage";
+import Navbar from "./src/components/common/navbar/Navbar";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     const[isShowSplash, setisShowSplash] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+          setisShowSplash(false);
+      }, 3000);
+    });
+
+
+    console.log(isShowSplash)
     return (
-        <>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name="Home"
-                        component={HomePage}
-                    />
-                    <Stack.Screen
-                        name="Product"
-                        component={ProductPage}
-                    />
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName={isShowSplash ? 'LandingPage' : 'Home'} screenOptions={{headerShown:false}}>
+                <Stack.Screen
+                    name="Home"
+                    component={HomePage}
+                />
+                <Stack.Screen
+                    name="SupermarketProducts"
+                    component={ProductPage}
 
-                    <Stack.Screen
-                        name={'Recepten'}
-                        component={receptenTonen}
-                        headerShown={false}
-                    />
+                />
 
-                    <Stack.Screen
-                        name={'ReceptenDetail'}
-                        component={ReceptDetails}
+                <Stack.Screen
+                    name={'Recepten'}
+                    component={receptenTonen}
+                    headerShown={false}
+                />
 
-                    />
-                    <Stack.Screen
-                        name={'AllRecepten'}
-                        component={AllRecepten}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
-        {isShowSplash ? (<LandingPage/>) : (<HomePage/>)}
-        </>
+                <Stack.Screen
+                    name={'LandingPage'}
+                    component={LandingPage}
+                    headerShown={true}
+                />
+
+                <Stack.Screen
+                    name={'ReceptenDetail'}
+                    component={ReceptDetails}
+
+                />
+                <Stack.Screen
+                    name={'AllRecepten'}
+                    component={AllRecepten}
+                />
+                <Stack.Screen
+                    name={"ShoppingList"}
+                    component={ShoppingListPage} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
