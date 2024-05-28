@@ -1,6 +1,11 @@
 {
   "expo": {
     "name": "Rottertouille",
+    "splash": {
+      "image": "./assets/LogoApp.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FDFFF2"
+    },
     "slug": "Rottertouille",
     "version": "1.0.0",
     "orientation": "portrait",

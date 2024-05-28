@@ -7,26 +7,27 @@ import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, View} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
-import LandingPage from "./src/pages/LandingPage";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import ShoppingListPage from "./src/pages/ShoppingListPage";
+import * as SplashScreen from 'expo-splash-screen';
 import Navbar from "./src/components/common/navbar/Navbar";
 
+SplashScreen.preventAutoHideAsync();
 export default function App() {
+
     const Stack = createNativeStackNavigator();
-    const[isShowSplash, setisShowSplash] = useState(true);
 
+    // setTimeout(SplashScreen.hideAsync, 2000);
     useEffect(() => {
-      setTimeout(() => {
-          setisShowSplash(false);
-      }, 3000);
-    });
+        setTimeout(()=> {
+            SplashScreen.hideAsync();
+        }, 1000)
+    }, );
 
-
-    console.log(isShowSplash)
     return (
+        <>
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={isShowSplash ? 'LandingPage' : 'Home'} screenOptions={{headerShown:false}}>
+            <Stack.Navigator screenOptions={{headerShown:true}}>
                 <Stack.Screen
                     name="Home"
                     component={HomePage}
@@ -44,12 +45,6 @@ export default function App() {
                 />
 
                 <Stack.Screen
-                    name={'LandingPage'}
-                    component={LandingPage}
-                    headerShown={true}
-                />
-
-                <Stack.Screen
                     name={'ReceptenDetail'}
                     component={ReceptDetails}
 
@@ -63,6 +58,7 @@ export default function App() {
                     component={ShoppingListPage} />
             </Stack.Navigator>
         </NavigationContainer>
+        </>
     );
 }
 
