@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {View, Text, StyleSheet, SafeAreaView, FlatList, StatusBar, TouchableOpacity, Image} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 import Search from "../common/search/Search";
 import image from '../../../assets/recepten.jpeg';
 
@@ -7,17 +8,20 @@ const receptenData = [
     {
         id: 1,
         title: "Pannenkoek",
-        img: image
+        img: image,
+        instructions: ["Mix ingredients", "Heat a pan", "Pour batter", "Cook until golden"]
     },
     {
         id: 2,
         title: "Pancake",
-        img: image
+        img: image,
+        instructions: ["Mix flour and eggs", "Heat a griddle", "Pour batter", "Flip when bubbles form"]
     },
     {
         id: 3,
         title: "Rijst",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
     {
         id: 4,
@@ -68,11 +72,13 @@ const Item = ({item, onPress}) => (
     </TouchableOpacity>
 );
 
-const AllRecepten = () => {
+const AllRecepten = ({navigation}) => {
     const [selectedId, setSelectedId] = useState();
 
     const renderItem = ({item}) => (
-        <Item item={item} onPress={() => setSelectedId(item.id)}/>
+        <Item item={item}
+              onPress={() => navigation.navigate('InstructionRecipe', { itemId: item.id, imageId: item.img, instructionId: item.instructions })}
+        />
     );
 
     return (
