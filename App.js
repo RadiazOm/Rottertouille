@@ -3,10 +3,12 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import receptenTonen from "./src/components/receipe/receptenTonen";
 import ReceptDetails from "./src/components/receipe/ReceptDetails";
 import AllRecepten from "./src/components/receipe/AllRecepten";
-import {StyleSheet, Text, View} from 'react-native';;
+import {StyleSheet, Text, View} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
 import InstructionRecipe from "./src/components/receipe/InstructionRecipe";
+import ShoppingListPage from "./src/pages/ShoppingListPage";
+
 
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -19,8 +21,9 @@ export default function App() {
                     component={HomePage}
                 />
                 <Stack.Screen
-                    name="Product"
+                    name="SupermarketProducts"
                     component={ProductPage}
+
                 />
 
                 <Stack.Screen
@@ -42,6 +45,9 @@ export default function App() {
                     name={'InstructionRecipe'}
                     component={InstructionRecipe}
                 />
+                <Stack.Screen
+                    name={"ShoppingList"}
+                    component={ShoppingListPage} />
             </Stack.Navigator>
         </NavigationContainer>
     );

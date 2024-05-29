@@ -112,7 +112,7 @@ const SuperMarktList = ({navigation}) => {
                       data={DATA}
                       horizontal={true}
                       renderItem={({item}) => <TouchableHighlight className={""}
-                                                                  onPress={() => navigation.navigate('Product')}><Supermarkt
+                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.title, img:item.img})}><Supermarkt
                           img={item.img}/></TouchableHighlight>}
                       keyExtractor={item => item.id}
             />
