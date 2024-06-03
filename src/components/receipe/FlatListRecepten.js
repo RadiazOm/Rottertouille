@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     },
 
     Recepten:{
-        marginTop:5,
         fontSize: 16,
         fontWeight: 'bold',
         color: 'gray',
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
 
     header: {
         marginLeft: 15,
-        marginTop:60
+        marginTop:20
     }
 
 });

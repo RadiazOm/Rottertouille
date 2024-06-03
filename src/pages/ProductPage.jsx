@@ -1,6 +1,5 @@
 import {Modal, Text, TextInput, View} from "react-native";
 import ProductList from "../components/productlist/ProductList";
-import {useState} from "react";
 function ProductPage({route, navigation}) {
     const item = route.params.title
     return(
@@ -12,6 +11,7 @@ function ProductPage({route, navigation}) {
                     <Text className={"font-bold mt-5 text-xl w-full"}>Producten van {item} </Text>
                 <ProductList navigation={navigation} title={item}/>
                 </View>
+
             </View>
         </>
     )
