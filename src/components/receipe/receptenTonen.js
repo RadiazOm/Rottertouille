@@ -1,6 +1,5 @@
 import {StatusBar, StyleSheet, Text, View} from "react-native";
 import Search from "../common/search/Search";
-import FlatListRecepten from "./FlatListRecepten";
 import FlatListCulinary from "./FlatListCulinary";
 
 

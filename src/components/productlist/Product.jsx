@@ -1,13 +1,8 @@
-import {Button, Image, Modal, Text, TextInput, TouchableHighlight, View} from "react-native";
+import {Button, Image, Text, View} from "react-native";
 import ProductImage from '../../../assets/brood.jpg'
-import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ModalProductDetail from "../common/modal/ModalProductDetail";
-import {useState} from "react";
-import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 const Product = ({title, price, discount, img}) => {
-    const [showModal, setShowModal] = useState(false);
     const newPrice = price - discount;
 
     const product = {

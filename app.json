@@ -2,7 +2,7 @@
   "expo": {
     "name": "Rottertouille",
     "splash": {
-      "image": "./assets/LogoApp.png",
+      "image": "./assets/knalrecept.gif",
       "resizeMode": "contain",
       "backgroundColor": "#FDFFF2"
     },
