@@ -1,5 +1,8 @@
 import {Modal, Text, TextInput, View} from "react-native";
 import ProductList from "../components/productlist/ProductList";
+import React from "react";
+
+
 function ProductPage({route, navigation}) {
     const item = route.params.title
     return(

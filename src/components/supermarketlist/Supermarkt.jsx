@@ -1,5 +1,4 @@
 import {Image, Text, View,StyleSheet} from "react-native";
-import {AlbertHeijn} from '../../../assets/Albert_Heijn_Logo.svg';
 '../../../assets/Lidl-Logo.svg'
 
 const Supermarkt = (img) => {
