@@ -67,12 +67,9 @@ const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
 
-
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
     }
-
-
 
     return (
         <SafeAreaView>
@@ -84,9 +81,12 @@ const SuperMarktList = ({navigation}) => {
             <FlatList className={"mt-3"}
                       data={DATA}
                       horizontal={true}
-                      renderItem={({item}) => <TouchableHighlight className={""}
-                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.title, img:item.img})}><Supermarkt
-                          img={item.img}/></TouchableHighlight>}
+                      renderItem={({item}) =>
+                          <TouchableHighlight className={""}
+                                              onPress={() => navigation.navigate('SupermarketProducts', {title: item.title})}>
+                              <Supermarkt img={item.img}/>
+                          </TouchableHighlight>
+                      }
                       keyExtractor={item => item.id}
             />
         </SafeAreaView>
