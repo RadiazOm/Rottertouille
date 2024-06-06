@@ -11,10 +11,10 @@ function ProductList({title, navigation}) {
     return (
         <>
             <SafeAreaView>
-            <View className={"grid grid-cols-4 col-span-3 gap-2"}>
+            <View className={"grid grid-cols-4 col-span-1 gap-1"}>
                 <FlatList className={"mt-10 w-80"}
-                          data={filteredData}
-                          numColumns={2}
+                          data={productData}
+                          numColumns={4}
                           horizontal={false}
                           renderItem={({item}) => <TouchableHighlight className={""}><Product navigation={navigation}
                               price={item.price} category={item.category} img={item.image_url} discount={item.discount} title={item.name}/></TouchableHighlight>}

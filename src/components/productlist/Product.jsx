@@ -31,7 +31,7 @@ const Product = ({title, price, discount, img}) => {
     return (
         <>
             <View className={"mt-3 ml-0 pr-5 h-36"}>
-                <Image className={"rounded h-25 w-25"} source={ProductImage}/>
+                <Image className={"rounded h-28 w-28"} source={ProductImage}/>
             </View>
             <View className={"flex m-2 flex-col"}>
                 <Text className={""}>{title}</Text>
