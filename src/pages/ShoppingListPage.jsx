@@ -1,3 +1,4 @@
+
 import {Text, View, StyleSheet, FlatList, TouchableHighlight} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Navbar from "../components/common/navbar/Navbar";
