@@ -6,8 +6,17 @@ import useFetch from "../../hooks/useFetch";
 function ProductList({title, navigation}) {
     const products = useFetch('http://89.33.85.29:1068/products');
    let productData = products.data.map((item) => item);
+   
 
-    const filteredData = productData.filter(({supermarket}) => supermarket.toLowerCase().includes(title.toLowerCase()));
+   // console.log(productData);
+
+   const supermarket = productData.map((x) => (x.supermarket))
+
+    console.log(supermarket);
+    // console.log(filteredData);
+
+    // const filteredData = productData.filter(({product}) => supermarket.toLowerCase().includes(title.toLowerCase()));
+    // console.log(filteredData);
     return (
         <>
             <SafeAreaView>

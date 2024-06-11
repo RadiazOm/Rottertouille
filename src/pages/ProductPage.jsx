@@ -45,6 +45,7 @@ function ProductPage({route, navigation}) {
     };
 
     function showResults(product) {
+        console.log(product)
 
         // const data = product.map((x) => console.log(x.name));
         // const newData = data.filter(item => {
@@ -86,7 +87,6 @@ function ProductPage({route, navigation}) {
                             />
                         </View>
                         : <Text></Text>}
-                    <Text>{inputValue}</Text>
                     <Text className={"font-bold mt-5 text-xl w-full"}>Producten van {item} </Text>
                     <ProductList navigation={navigation} title={item}/>
                 </View>
