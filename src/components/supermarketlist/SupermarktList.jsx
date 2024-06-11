@@ -69,7 +69,7 @@ const SuperMarktList = ({navigation}) => {
 
     return (
         <SafeAreaView>
-            <View className={"pl-3 pr-8 flex content-between flex-row"}>
+            <View className={"pl-3 pr-8 flex flex-row"}>
                 <View className={"flex-1"}>
                     <Text style={styles.supermarktTitle}>Supermarkt</Text>
                 </View>
@@ -77,7 +77,7 @@ const SuperMarktList = ({navigation}) => {
             <FlatList className={"mt-3"}
                       data={supermarkets}
                       horizontal={true}
-                      renderItem={({item}) => <TouchableHighlight className={""}
+                      renderItem={({item}) => <TouchableHighlight
                                                                   onPress={() => navigation.navigate('SupermarketProducts', {title: item.name, img:item.image_url})}><Supermarkt
                           img={item.image_url}/></TouchableHighlight>}
                       keyExtractor={item => item.id}

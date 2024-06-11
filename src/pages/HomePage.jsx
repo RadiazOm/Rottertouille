@@ -9,7 +9,7 @@ export default function HomePage({navigation}) {
 
     return (
         <>
-                <ScrollView>
+                <ScrollView style={styles.background}>
                     <Search/>
                     <FlatListRecepten navigation={navigation}/>
                     <FlatListCulinary/>
@@ -25,5 +25,8 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 100,
         height:400
+    },
+    background: {
+        backgroundColor: '#f5f5f5',
     }
 })
