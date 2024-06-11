@@ -1,15 +1,12 @@
 
 import {Text, View, StyleSheet, FlatList, TouchableHighlight} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Navbar from "../components/common/navbar/Navbar";
 import {useEffect, useState} from "react";
-import Supermarkt from "../components/supermarketlist/Supermarkt";
 
 
 function ShoppingListPage({navigation}) {
 
     const [products, setProducts] = useState([])
-    const [showProduct, setShowProducts] = useState([]);
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -20,16 +17,11 @@ function ShoppingListPage({navigation}) {
                     if (!parsedProducts || typeof parsedProducts !== 'object') return;
 
                     setProducts(parsedProducts);
-                    console.log(products);
-                    // setShowProducts(productListDetails);
                 })
         }
 
         loadProducts();
     }, []);
-    AsyncStorage.getItem('products', (err, result) => {
-        console.log(result);
-    })
     return (
         <>
             <View style={styles.Container}>

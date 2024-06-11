@@ -1,13 +1,13 @@
 import {Image, Text, View,StyleSheet} from "react-native";
 '../../../assets/Lidl-Logo.svg'
 
-const Supermarkt = (img) => {
+const Supermarkt = ({img}) => {
 
     return (
         <>
         <View  style={styles.container} >
             <View style={styles.imageContainer}>
-                <Image source={img.img} style={styles.image} />
+                <Image source={{uri: "http://89.33.85.29:1068/image/" + img}} style={styles.image} />
             </View>
         </View>
         </>

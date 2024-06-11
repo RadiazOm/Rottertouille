@@ -1,91 +1,38 @@
-import React from 'react';
-import {FlatList, SafeAreaView, TouchableHighlight, View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {FlatList, SafeAreaView,TouchableHighlight, View} from "react-native";
 import Product from "./Product";
 import useFetch from "../../hooks/useFetch";
 
+
 function ProductList({title, navigation}) {
-    const { data, loading, error } = useFetch('http://89.33.85.29:1068/products');
+    const products = useFetch('http://89.33.85.29:1068/products');
+   let productData = products.data.map((item) => item);
+   
 
-    if (loading) {
-        return <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />;
-    }
+   // console.log(productData);
 
-    if (error) {
-        return (
-            <View style={styles.errorContainer}>
-                <Text style={styles.errorText}>Er is een fout opgetreden bij het ophalen van de gegevens.</Text>
-            </View>
-        );
-    }
+   const supermarket = productData.map((x) => (x.supermarket))
 
-    // Debugging statements
-    // console.log("Data fetched: ", data);
-    console.log("Title: ", title);
+    console.log(supermarket);
+    // console.log(filteredData);
 
-    const filteredData = data.filter(({supermarket}) => supermarket.toLowerCase().includes(title.toLowerCase()));
-
-    // Debugging statements
-    // console.log("Filtered Data: ", filteredData);
-
+    // const filteredData = productData.filter(({product}) => supermarket.toLowerCase().includes(title.toLowerCase()));
+    // console.log(filteredData);
     return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-                contentContainerStyle={styles.listContainer}
-                data={filteredData}
-                numColumns={2}
-                renderItem={({item}) => (
-                    <TouchableHighlight style={styles.itemContainer} onPress={() => navigation.navigate('ProductDetails', { productId: item.id })}>
-                        <View style={styles.item}>
-                            <Text>{item.name}</Text>
-                            <Text>{item.price}</Text>
-                            <Text>{item.category}</Text>
-                        </View>
-                    </TouchableHighlight>
-                )}
-                keyExtractor={item => item.id}
-            />
-        </SafeAreaView>
-    );
+        <>
+            <SafeAreaView>
+            <View className={"grid grid-cols-4 col-span-1 gap-1"}>
+                <FlatList className={"mt-10 w-80"}
+                          data={productData}
+                          numColumns={4}
+                          horizontal={false}
+                          renderItem={({item}) => <TouchableHighlight className={""}><Product navigation={navigation}
+                              price={item.price} category={item.category} img={item.image_url} discount={item.discount} title={item.name}/></TouchableHighlight>}
+                />
+                <Product/>
+            </View>
+            </SafeAreaView>
+        </>
+    )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    listContainer: {
-        paddingHorizontal: 10,
-        paddingBottom: 10,
-    },
-    itemContainer: {
-        flex: 1,
-        margin: 10,
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        overflow: 'hidden',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 5,
-    },
-    loader: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    errorContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    errorText: {
-        color: 'red',
-        fontSize: 16,
-    },
-    item: {
-        padding: 10,
-    },
-});
-
-export default ProductList;
+export default ProductList
