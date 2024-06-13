@@ -14,7 +14,6 @@ const HomeScreenNavigator = () => {
 
     return (
             <Stack.Navigator>
-                <Stack.Screen name={"Home"} component={HomePage}/>
                 <Stack.Screen name={"SupermarketProducts"} component={ProductPage}/>
                 <Stack.Screen name={"ReceptenDetail"} component={ReceptDetails}/>
                 <Stack.Screen name={"AllRecepten"} component={AllRecepten}/>

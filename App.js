@@ -26,15 +26,15 @@ export default function App() {
 
     // setTimeout(SplashScreen.hideAsync, 2000);
     useEffect(() => {
-        setTimeout(()=> {
+        setTimeout(() => {
             SplashScreen.hideAsync();
         }, 2000)
-    }, );
+    },);
 
     return (
         <>
             <NavigationContainer>
-                <Tab.Navigator screenOptions={{ tabBarShowLabel:false, headerShown:false}}>
+                <Tab.Navigator screenOptions={{tabBarShowLabel: false, headerShown: false}}>
                     <Tab.Screen
                         name="Home"
                         options={{
@@ -46,15 +46,16 @@ export default function App() {
                         }}
                         component={HomeScreenNavigator}
                     />
-                    <Tab.Screen name={"Location"}
-                                options={{
-                                    tabBarIcon: ({size, focused, color}) => {
-                                        return (
-                                            <Image style={styles.navigationItem} source={Location}/>
-                                        )
-                                    }
-                                }}
-                                component={LocationPage}
+                    <Tab.Screen
+                        name={"Location"}
+                        options={{
+                            tabBarIcon: ({size, focused, color}) => {
+                                return (
+                                    <Image style={styles.navigationItem} source={Location}/>
+                                )
+                            }
+                        }}
+                        component={LocationPage}
                     />
                     <Tab.Screen
                         name={"ShoppingList"}
@@ -65,7 +66,7 @@ export default function App() {
                                 )
                             }
                         }}
-                        component={ShoppingListPage} />
+                        component={ShoppingListPage}/>
                     <Tab.Screen
                         name={"Profile"}
                         options={{
@@ -75,7 +76,7 @@ export default function App() {
                                 )
                             }
                         }}
-                        component={ProfilePage} />
+                        component={ProfilePage}/>
                 </Tab.Navigator>
             </NavigationContainer>
         </>
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     navigationItem: {
-        width:35,
-        height:35
+        width: 35,
+        height: 35
     }
 });
