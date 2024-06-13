@@ -8,12 +8,8 @@ import {
     StatusBar, Button, Image, TouchableHighlight, SectionList,
     Linking
 } from 'react-native';
-// import {Picker} from "@react-native-picker/picker";
-import Lidl from '../../../assets/Lidl-Logo.svg.png'
-import Jumbo from '../../../assets/Jumbo_Logo.svg.png'
-import Filter from '../../../assets/filter.png';
 import Supermarkt from "./Supermarkt";
-import useFetch from "../../hooks/useFetch";
+
 
 
 const SuperMarktList = ({navigation}) => {
@@ -42,30 +38,6 @@ const SuperMarktList = ({navigation}) => {
         setDisplayFilter(!displayFilter);
     }
 
-    // function navigateUrl() {
-    //   navigation.navigate('Product')
-    // }
-
-    // function renderDropdown() {
-    //     if (displayFilter) {
-    //         return (
-    //             <View className={"bg-white divide-y divide-gray-100 rounded-lg h-40 mt-4 shadow w-44 dark:bg-gray-700"}>
-    //                 <SectionList
-    //                     sections={filterOptions}
-    //                     keyExtractor={(item, index) => item + index}
-    //                     renderItem={({item}) => (
-    //                         <View>
-    //                             <Text>{item}</Text>
-    //                         </View>
-    //                     )}
-    //                     renderSectionHeader={({section: {title}}) => (
-    //                         <Text className={"font-bold"}>{title}</Text>
-    //                     )}
-    //                 />
-    //             </View>
-    //         )
-    //     }
-    // }
 
     return (
         <SafeAreaView>

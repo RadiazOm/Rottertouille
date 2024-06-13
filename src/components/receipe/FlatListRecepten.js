@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
 
 
     image: {
-        width: 135,
-        height: 135,
+        width: 160,
+        height: 160,
         borderRadius: 10
     },
 
     header: {
         marginLeft: 15,
-        marginTop:20
+        marginTop:'10%',
     }
 
 });

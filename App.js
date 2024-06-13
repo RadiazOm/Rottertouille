@@ -6,7 +6,7 @@ import AllRecepten from "./src/components/receipe/AllRecepten";
 import {StyleSheet, Image} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import ShoppingListPage from "./src/pages/ShoppingListPage";
 import * as SplashScreen from 'expo-splash-screen';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -17,6 +17,7 @@ import Location from './assets/location.png';
 import Home from './assets/home-icon.png';
 import ShoppingList from './assets/Shoppingcart.png';
 import Profile from './assets/user-icon.png';
+import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {

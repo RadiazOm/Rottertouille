@@ -4,7 +4,7 @@ import image from '../../../assets/recepten.jpeg';
 
 
 
-const ReceptDetails = () => {
+const ReceptDetails = ({navigate}) => {
 
     const groceries = [
         {
@@ -38,7 +38,7 @@ const ReceptDetails = () => {
         },
     ];
     return (
-        <ScrollView>
+        <ScrollView style={styles.background}>
             <Image source={image} style={styles.receiptImage} />
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
@@ -59,9 +59,7 @@ const ReceptDetails = () => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => {
-                        console.log('You tapped the button!');
-                    }}
+                    onPress={() => navigation.navigate('InstructionRecipe')} // Navigate to the instructions page
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
@@ -88,8 +86,10 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "bold",
+        color: "gray",
+        marginLeft: '10%',
     },
     receiptImage: {
         width: "100%",
@@ -159,6 +159,9 @@ const styles = StyleSheet.create({
     buttonText2: {
         color: '#fff',
         fontWeight: 'bold',
+    },
+    background: {
+        backgroundColor: '#fff',
     },
 });
 
