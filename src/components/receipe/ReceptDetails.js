@@ -4,7 +4,7 @@ import image from '../../../assets/recepten.jpeg';
 
 
 
-const ReceptDetails = ({navigate}) => {
+const ReceptDetails = ({navigation}) => {
 
     const groceries = [
         {
@@ -59,7 +59,8 @@ const ReceptDetails = ({navigate}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => navigation.navigate('InstructionRecipe')} // Navigate to the instructions page
+                    onPress={() => navigation.navigate('InstructionRecipe')
+                    }
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
