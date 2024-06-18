@@ -1,10 +1,21 @@
 import React from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Button, Pressable, Alert} from "react-native";
 import image from '../../../assets/recepten.jpeg';
+import {useRoute} from "@react-navigation/native";
 
 
 
 const ReceptDetails = ({navigation}) => {
+    const route = useRoute();
+    const { item } = route.params; // Haal het item op uit de route params
+
+    if (!item) {
+        return (
+            <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>Geen item gegevens gevonden</Text>
+            </View>
+        );
+    }
 
     const groceries = [
         {
@@ -37,6 +48,8 @@ const ReceptDetails = ({navigation}) => {
             price2: '€4,00'
         },
     ];
+
+
     return (
         <ScrollView style={styles.background}>
             <Image source={image} style={styles.receiptImage} />
@@ -59,8 +72,7 @@ const ReceptDetails = ({navigation}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => navigation.navigate('InstructionRecipe')
-                    }
+                    onPress={() => navigation.navigate('InstructionRecipe',{item: item})}
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
@@ -68,9 +80,7 @@ const ReceptDetails = ({navigation}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button2}
-                    onPress={() => {
-                        console.log('You tapped the button!');
-                    }}
+                    onPress={() => navigation.navigate('InstructionRecipe', {itemID: item.id, imageId: item.img, instructionId: item.instructions})}
                 >
                     <Text style={styles.buttonText2}>Voeg toe aan lijst</Text>
                 </Pressable>
@@ -163,6 +173,15 @@ const styles = StyleSheet.create({
     },
     background: {
         backgroundColor: '#fff',
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    errorText: {
+        fontSize: 18,
+        color: 'red',
     },
 });
 

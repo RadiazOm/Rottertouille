@@ -1,11 +1,11 @@
-import {FlatList, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
+import {FlatList, Image, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
 import ProductList from "../components/productlist/ProductList";
 import {useEffect, useState, useRef} from "react";
 import Product from "../components/productlist/Product";
 import useFetch from "../hooks/useFetch";
 
 function ProductPage({route, navigation}) {
-    const item = route.params.title
+    const item = route.params ? route.params.title : null;
     const [inputValue, setInputValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const [currentProducts, setCurrentProducts] = useState([]);
@@ -81,9 +81,14 @@ function ProductPage({route, navigation}) {
                                 data={productData}
                                 numColumns={1}
                                 horizontal={false}
-                                renderItem={({item}) => <TouchableHighlight onPress={scrollToProduct}
-                                                                            className={""}><View><Text
-                                    style={styles.DropdownContent}>{item.name}</Text></View></TouchableHighlight>}
+                                renderItem={({item}) =>
+                                    <TouchableHighlight onPress={scrollToProduct} className={""}>
+                                        <View>
+                                            <Text style={styles.DropdownContent}>
+                                                {item.name}
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>}
                             />
                         </View>
                         : <Text></Text>}

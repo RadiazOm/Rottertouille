@@ -77,7 +77,7 @@ const AllRecepten = ({navigation}) => {
 
     const renderItem = ({item}) => (
         <Item item={item}
-              onPress={() => navigation.navigate('InstructionRecipe')}
+              onPress={() => navigation.navigate('InstructionRecipe', {itemID: item.id, imageId: item.img, instructionId: item.instructions})}
         />
     );
 

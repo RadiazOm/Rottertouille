@@ -3,11 +3,15 @@ import {useRoute} from "@react-navigation/native";
 
 function InstructionRecipe() {
     const route = useRoute()
-    const {itemID, imageId, instructionId} = route.params
+    const item = route.params ? route.params.item : null;
+    // const imageId = item ? item.img : null;
+    const instructionId = item ? item.instructions : null;
+
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image style={styles.image} resizeMode={'cover'} source={imageId}/>
+                <Image style={styles.image} resizeMode={'cover'} source={item}/>
             </View>
             <Text style={styles.h1}>Voorbereiding</Text>
             <Text style={styles.instructions}> {instructionId} </Text>
