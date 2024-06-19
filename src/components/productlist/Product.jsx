@@ -11,6 +11,10 @@ const Product = ({title, price, discount, img}) => {
         discount: discount
     }
 
+    if(!title) {
+        return ;
+    }
+
 
     async function storeProductsAsync() {
         try {
@@ -31,7 +35,7 @@ const Product = ({title, price, discount, img}) => {
     return (
         <>
             <View className={"mt-3 ml-0 pr-5 h-36"}>
-                <Image className={"rounded h-28 w-28"} source={ProductImage}/>
+                <Image className={"rounded h-28 w-28"} source={{uri: img}}/>
             </View>
             <View className={"flex m-2 flex-col"}>
                 <Text className={""}>{title}</Text>

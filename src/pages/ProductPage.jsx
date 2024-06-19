@@ -5,13 +5,41 @@ import Product from "../components/productlist/Product";
 import useFetch from "../hooks/useFetch";
 
 function ProductPage({route, navigation}) {
-    const item = route.params.title
+    const item = route.params.title;
+    const id = route.params.id;
     const [inputValue, setInputValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const [currentProducts, setCurrentProducts] = useState([]);
+    const [productData, setProductData] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState(currentProducts);
-    const products = useFetch('http://89.33.85.29:1068/products');
-    let productData = products.data.map((item) => item);
+    // const products = useFetch('http://89.33.85.29:1068/products');
+
+    const [products, setProducts] = useState(null)
+
+    useEffect(() => {
+        (async () => {
+
+            try {
+                const response = await fetch("http://89.33.85.29:1068/products/")
+                const json = await response.json()
+                setProducts(json)
+            } catch (e) {
+               console.log(e)
+            }
+
+
+        })();
+    }, [])
+    useEffect(() => {
+        if (products !== null) {
+            if (products.length == 0) {
+                console.log("Product is zero")
+                return;
+            } else {
+                setProductData(products.products.map((item) => item));
+            }
+        }
+    }, [products]);
 
     const data = [
         {id: '1', name: 'Apple'},
@@ -88,7 +116,7 @@ function ProductPage({route, navigation}) {
                         </View>
                         : <Text></Text>}
                     <Text className={"font-bold mt-5 text-xl w-full"}>Producten van {item} </Text>
-                    <ProductList navigation={navigation} title={item}/>
+                    <ProductList navigation={navigation} id={id} title={item}/>
                 </View>
             </View>
         </>

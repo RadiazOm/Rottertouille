@@ -25,7 +25,7 @@ const Products = () => {
                         <Image
                             style={styles.tinyLogo}
                             source={{
-                                uri: 'http://89.33.85.29:1068/image/' + item.image_url,
+                                uri: item.image_url,
                             }}
                         />
                         <Text>{item.name}</Text>
