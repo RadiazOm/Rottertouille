@@ -80,7 +80,7 @@ const ReceptDetails = ({navigation}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button2}
-                    onPress={() => navigation.navigate('InstructionRecipe', {itemID: item.id, imageId: item.img, instructionId: item.instructions})}
+                    onPress={() => console.log('Voeg toe aan lijst button ingedrukt')}
                 >
                     <Text style={styles.buttonText2}>Voeg toe aan lijst</Text>
                 </Pressable>

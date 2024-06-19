@@ -10,7 +10,6 @@ const ReceptenTonen = ({navigation}) => {
         <View style={styles.container}>
             <View>
                 <Search/>
-
                 <FlatListCulinary/>
                 <StatusBar style="auto"/>
             </View>

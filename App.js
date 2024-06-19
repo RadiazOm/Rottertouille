@@ -36,7 +36,7 @@ export default function App() {
             <NavigationContainer>
                 <Tab.Navigator screenOptions={{tabBarShowLabel: false, headerShown: false}}>
                     <Tab.Screen
-                        name="Home"
+                        name="HomeTab"
                         options={{
                             tabBarIcon: ({size, focused, color}) => {
                                 return (

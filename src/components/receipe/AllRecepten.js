@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {View, Text, StyleSheet, SafeAreaView, FlatList, StatusBar, TouchableOpacity, Image} from "react-native";
-import {useNavigation} from "@react-navigation/native";
 import Search from "../common/search/Search";
 import image from '../../../assets/recepten.jpeg';
 
@@ -26,42 +25,49 @@ const receptenData = [
     {
         id: 4,
         title: "Pizza",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
     {
         id: 5,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 
     {
         id: 6,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 
     {
         id: 7,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 
     {
         id: 8,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 
     {
         id: 9,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 
     {
         id: 10,
         title: "Fried Chicken",
-        img: image
+        img: image,
+        instructions: ["Rinse rice", "Boil water", "Add rice", "Simmer until tender"]
     },
 ];
 
@@ -77,7 +83,13 @@ const AllRecepten = ({navigation}) => {
 
     const renderItem = ({item}) => (
         <Item item={item}
-              onPress={() => navigation.navigate('InstructionRecipe', {itemID: item.id, imageId: item.img, instructionId: item.instructions})}
+              onPress={() => navigation.navigate('InstructionRecipe', {
+                  itemID: item.id,
+                  imageId: item.img,
+                  instructionId: item.instructions,
+                  title: item.title,
+                  instructions: item.instructions
+              })}
         />
     );
 

@@ -1,43 +1,38 @@
-import React, {useEffect, useState} from 'react';
+// supermarktList.jsx
+
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     View,
     FlatList,
     StyleSheet,
     Text,
-    StatusBar, Button, Image, TouchableHighlight, SectionList,
-    Linking
+    TouchableHighlight,
 } from 'react-native';
-import Supermarkt from "./Supermarkt";
+import Supermarkt from './Supermarkt';
 
-
-
-const SuperMarktList = ({navigation}) => {
-
+const SuperMarktList = ({ navigation }) => {
     const [displayFilter, setDisplayFilter] = useState(false);
-
     const [data, setData] = useState([]);
-    useEffect(() => {
 
+    useEffect(() => {
         const fetchData = async () => {
-            const response = fetch("http://89.33.85.29:1068/supermarkets"
-            )
-                .then(response => response.json())
-                .then(data => {
-                    setData(data.supermarkets)
-                }).catch((error) => (console.log(error)))
+            try {
+                const response = await fetch("http://89.33.85.29:1068/supermarkets");
+                const json = await response.json();
+                setData(json.supermarkets);
+            } catch (error) {
+                console.log(error);
+            }
         };
-        fetchData()
+        fetchData();
     }, []);
 
-    const supermarkets = data.map((x) => (x));
-    console.log(supermarkets);
-
+    const supermarkets = data.map((x) => x);
 
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
     }
-
 
     return (
         <SafeAreaView>
@@ -46,13 +41,20 @@ const SuperMarktList = ({navigation}) => {
                     <Text style={styles.supermarktTitle}>Supermarkt</Text>
                 </View>
             </View>
-            <FlatList className={"mt-3"}
-                      data={supermarkets}
-                      horizontal={true}
-                      renderItem={({item}) => <TouchableHighlight
-                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.name, img:item.image_url})}><Supermarkt
-                          img={item.image_url}/></TouchableHighlight>}
-                      keyExtractor={item => item.id}
+            <FlatList
+                className={"mt-3"}
+                data={supermarkets}
+                horizontal={true}
+                keyExtractor={item => item.name}
+                renderItem={({ item }) => (
+                    <TouchableHighlight
+                        onPress={() => navigation.navigate('SupermarketProducts', { title: item.name, img: item.image_url })}
+                    >
+                        <View>
+                            <Supermarkt img={item.image_url} />
+                        </View>
+                    </TouchableHighlight>
+                )}
             />
         </SafeAreaView>
     );
@@ -65,5 +67,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'gray',
     }
-})
+});
+
 export default SuperMarktList;
