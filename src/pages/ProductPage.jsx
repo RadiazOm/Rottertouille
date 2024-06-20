@@ -1,71 +1,70 @@
-import {FlatList, Image, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
+import { FlatList, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import ProductList from "../components/productlist/ProductList";
-import {useEffect, useState, useRef} from "react";
-import Product from "../components/productlist/Product";
-import useFetch from "../hooks/useFetch";
+import { useEffect, useState } from "react";
 
-function ProductPage({route, navigation}) {
-    const item = route.params ? route.params.title : null;
+function ProductPage({ route, navigation }) {
+    const item = route.params.title;
+    const id = route.params.id;
     const [inputValue, setInputValue] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const [isFilterd, setIsFiltered] = useState(false);
     const [currentProducts, setCurrentProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState(currentProducts);
-    const products = useFetch('http://89.33.85.29:1068/products');
-    let productData = products.data.map((item) => item);
+    const [productData, setProductData] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [products, setProducts] = useState(null);
 
-    const data = [
-        {id: '1', name: 'Apple'},
-        {id: '2', name: 'Banana'},
-        {id: '3', name: 'Cherry'},
-        {id: '4', name: 'Date'},
-        {id: '5', name: 'Elderberry'},
-        {id: '6', name: 'Fig'},
-        {id: '7', name: 'Grape'},
-        {id: '8', name: 'Honeydew'}
-    ];
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await fetch("http://89.33.85.29:1068/products/");
+                const json = await response.json();
+                setProducts(json);
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+    }, []);
 
+    useEffect(() => {
+        if (products !== null) {
+            if (products.length == 0) {
+                console.log("Product is zero");
+                return;
+            } else {
+                setProductData(products.products.map((item) => item));
+            }
+        }
+    }, [products]);
 
     const handleChange = async (text) => {
-        setShowDropdown(true)
-        setInputValue(text)
-        await fetch("http://89.33.85.29:1068/products/search", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "query": inputValue
-            })
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
+        setInputValue(text);
+
+        if (text === "") {
+            setShowDropdown(false);
+            setIsFiltered(false);
+            setCurrentProducts([]);
+            return;
+        }
+
+        setShowDropdown(true);
+        setIsFiltered(true);
+
+        try {
+            const response = await fetch("http://89.33.85.29:1068/products/search/" + id, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": text
+                })
+            });
+            const data = await response.json();
             setCurrentProducts(data.products);
-            showResults(currentProducts);
-        })
+        } catch (error) {
+            console.log(error);
+        }
     };
-
-    function showResults(product) {
-        console.log(product)
-
-        // const data = product.map((x) => console.log(x.name));
-        // const newData = data.filter(item => {
-        //     const itemData = item.name.toUpperCase();
-        //     const textData = inputValue.toUpperCase();
-        //     return itemData.indexOf(textData) > -1;
-        // });
-
-        // for (let i = 0; i < results.filterEventUser.length; i++) {
-        //     console.log("data: " + results.filterEventUser[i].name);
-        //     let option = document.createElement("option");
-        //     option.textContent = results.filterEventUser[i].name;
-        //     datalist.appendChild(option);
-        // }
-    }
-
-
-    function scrollToProduct() {
-        alert(item.name)
-    }
 
     return (
         <>
@@ -75,29 +74,28 @@ function ProductPage({route, navigation}) {
                     <TextInput
                         onChangeText={handleChange}
                         className={"border-primaryColor rounded-[100px] border-2 mt-2 w-60 h-10 pl-5 bg-white"}></TextInput>
-                    {showDropdown ?
+                    {showDropdown && (
                         <View style={styles.Dropdown}>
                             <FlatList
-                                data={productData}
+                                data={isFilterd ? currentProducts : productData}
                                 numColumns={1}
                                 horizontal={false}
-                                renderItem={({item}) =>
-                                    <TouchableHighlight onPress={scrollToProduct} className={""}>
+                                renderItem={({ item }) => (
+                                    <TouchableHighlight onPress={() => setFilteredProducts([item])}>
                                         <View>
-                                            <Text style={styles.DropdownContent}>
-                                                {item.name}
-                                            </Text>
+                                            <Text style={styles.DropdownContent}>{item.name}</Text>
                                         </View>
-                                    </TouchableHighlight>}
+                                    </TouchableHighlight>
+                                )}
                             />
                         </View>
-                        : <Text></Text>}
+                    )}
                     <Text className={"font-bold mt-5 text-xl w-full"}>Producten van {item} </Text>
-                    <ProductList navigation={navigation} title={item}/>
+                    <ProductList isFilterd={isFilterd} filterdProducts={filteredProducts} navigation={navigation} id={id} title={item} />
                 </View>
             </View>
         </>
-    )
+    );
 }
 
 export default ProductPage;
@@ -110,11 +108,10 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         opacity: 20
     },
-
     DropdownContent: {
         color: "white",
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: "center"
     }
-})
+});

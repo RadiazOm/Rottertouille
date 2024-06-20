@@ -29,7 +29,7 @@ const Products = () => {
                             }}
                         />
                         <Text>{item.name}</Text>
-                        <Text>Є{item.price}</Text>
+                        <Text>€ {item.price}</Text>
 
                     </View>
                 )}
@@ -61,10 +61,7 @@ const styles = StyleSheet.create({
 
 
     item: {
-        paddingBottom: '10%',
-        marginVertical: "45%",
         marginHorizontal: 7,
-        height: 150,
         width: 135, // or whatever width you want
         marginRight: 14,
 
@@ -73,7 +70,7 @@ const styles = StyleSheet.create({
 
     tinyLogo: {
         width: '100%',
-        height: '100%',
+        height: 150,
         borderRadius:10,
     },
 });
