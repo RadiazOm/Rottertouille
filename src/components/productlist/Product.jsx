@@ -34,12 +34,11 @@ const Product = ({title, price, discount, img}) => {
 
     return (
         <>
-            <View className={"mt-3 ml-0 pr-5 h-36"}>
+            <View className={"mt-3  mr-2 pl-5 pr-5 h-28"}>
                 <Image className={"rounded h-28 w-28"} source={{uri: img}}/>
             </View>
-            <View className={"flex m-2 flex-col"}>
-                <Text className={""}>{title}</Text>
-                <Text className={"line-through flex-row"}>€{Math.round(price * 100) / 100}</Text>
+            <View className={"flex w-full m-2 flex-col"}>
+                <Text className={"w-40"}>{title}</Text>
                 <Text className={"flex-row"}>€ {Math.round(newPrice * 100) / 100}</Text>
                 <View className={"flex"}>
                     <Button onPress={storeProductsAsync} title={"Add to list"}

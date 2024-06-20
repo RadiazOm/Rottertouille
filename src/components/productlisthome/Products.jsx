@@ -41,7 +41,7 @@ const Products = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 2,
-        marginLeft: 4
+        marginLeft: 4,
     },
     header: {
         paddingHorizontal: 10,
