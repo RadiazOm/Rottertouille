@@ -29,7 +29,7 @@ const Products = () => {
                             }}
                         />
                         <Text>{item.name}</Text>
-                        <Text>{item.price}</Text>
+                        <Text>Є{item.price}</Text>
 
                     </View>
                 )}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 
     item: {
-        paddingBottom: 18,
+        paddingBottom: '10%',
         marginVertical: "45%",
         marginHorizontal: 7,
         height: 150,
