@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     SafeAreaView,
     View,
@@ -13,63 +13,29 @@ import Lidl from '../../../assets/Lidl-Logo.svg.png'
 import Jumbo from '../../../assets/Jumbo_Logo.svg.png'
 import Filter from '../../../assets/filter.png';
 import Supermarkt from "./Supermarkt";
-// import useFetch from "../../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 
-const DATA = [
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'Lidl',
-        img: require('../../../assets/Lidl-Logo.svg.png')
-    },
-    {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Dirk',
-        img: require('../../../assets/dirk-logo.png')
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Plus',
-        img: require('../../../assets/plus-logo.png')
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d80',
-        title: 'Jumbo',
-        img: require('../../../assets/Jumbo_Logo.svg.png')
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'Albert Heijn',
-        img: require('../../../assets/Albert_Heijn_Logo.svg')
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d79',
-        title: 'Spar',
-        img: require('../../../assets/spar-logo.png')
-    }
-];
-
-const filterOptions = [
-    {
-        title: 'Alfabetische volgorde',
-        data: ['Pizza', 'Burger', 'Risotto'],
-    },
-    {
-        title: 'Sides',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-    },
-    {
-        title: 'Drinks',
-        data: ['Water', 'Coke', 'Beer'],
-    },
-    {
-        title: 'Desserts',
-        data: ['Cheese Cake', 'Ice Cream'],
-    },
-];
 
 const SuperMarktList = ({navigation}) => {
 
     const [displayFilter, setDisplayFilter] = useState(false);
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const response = fetch("http://89.33.85.29:1068/supermarkets"
+            )
+                .then(response => response.json())
+                .then(data => {
+                    setData(data.supermarkets)
+                }).catch((error) => (console.log(error)))
+        };
+        fetchData()
+    }, []);
+
+    const supermarkets = data.map((x) => (x));
+    console.log(supermarkets);
 
 
     function toggleDropDown() {
@@ -109,11 +75,11 @@ const SuperMarktList = ({navigation}) => {
                 </View>
             </View>
             <FlatList className={"mt-3"}
-                      data={DATA}
+                      data={supermarkets}
                       horizontal={true}
                       renderItem={({item}) => <TouchableHighlight className={""}
-                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.title, img:item.img})}><Supermarkt
-                          img={item.img}/></TouchableHighlight>}
+                                                                  onPress={() => navigation.navigate('SupermarketProducts', {title: item.name, id: item._id, img:item.image_url})}><Supermarkt
+                          img={item.image_url}/></TouchableHighlight>}
                       keyExtractor={item => item.id}
             />
         </SafeAreaView>
