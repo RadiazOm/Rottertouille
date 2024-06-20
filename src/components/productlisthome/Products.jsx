@@ -25,11 +25,11 @@ const Products = () => {
                         <Image
                             style={styles.tinyLogo}
                             source={{
-                                uri: 'http://89.33.85.29:1068/image/' + item.image_url,
+                                uri: item.image_url,
                             }}
                         />
                         <Text>{item.name}</Text>
-                        <Text>{item.price}</Text>
+                        <Text>€ {item.price}</Text>
 
                     </View>
                 )}
@@ -41,7 +41,6 @@ const Products = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 2,
-        marginLeft: 4
     },
     header: {
         paddingHorizontal: 10,
@@ -61,10 +60,7 @@ const styles = StyleSheet.create({
 
 
     item: {
-        paddingBottom: 18,
-        marginVertical: 8,
         marginHorizontal: 7,
-        height: 150,
         width: 135, // or whatever width you want
         marginRight: 14,
 
@@ -73,7 +69,7 @@ const styles = StyleSheet.create({
 
     tinyLogo: {
         width: '100%',
-        height: '100%',
+        height: 150,
         borderRadius:10,
     },
 });
