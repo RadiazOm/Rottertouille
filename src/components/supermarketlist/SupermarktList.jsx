@@ -62,11 +62,11 @@ const SuperMarktList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     supermarktTitle: {
-        marginTop: 15,
+        marginTop: 8,
         fontSize: 16,
         fontWeight: 'bold',
         color: 'gray',
-    }
+    },
 });
 
 export default SuperMarktList;

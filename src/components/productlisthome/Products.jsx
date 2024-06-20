@@ -41,7 +41,7 @@ const Products = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 2,
-        marginLeft: 4
+        marginLeft: 4,
     },
     header: {
         paddingHorizontal: 10,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
     item: {
         paddingBottom: 18,
-        marginVertical: 8,
+        marginVertical: "45%",
         marginHorizontal: 7,
         height: 150,
         width: 135, // or whatever width you want
