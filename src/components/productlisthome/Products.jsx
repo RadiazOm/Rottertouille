@@ -10,6 +10,8 @@ const Products = () => {
             .then(data => setProducts(data.products));
     }, []);
 
+    // console.log(products[0].discount.discount)
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -29,7 +31,8 @@ const Products = () => {
                             }}
                         />
                         <Text>{item.name}</Text>
-                        <Text>€ {item.price}</Text>
+                        <Text style={item.discount.discount ? {textDecorationLine: 'line-through', textDecorationStyle: 'solid'} : ''}>€ {item.discount.discount ? (parseFloat(item.discount.discount) + parseFloat(item.price)).toFixed(2) : item.price}</Text>
+                        <Text>{item.discount.discount ? '€' + item.price : ''}</Text>
 
                     </View>
                 )}
