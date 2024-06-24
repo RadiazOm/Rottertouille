@@ -1,13 +1,15 @@
-import {FlatList, Modal, SafeAreaView, TouchableHighlight, View} from "react-native";
+import {FlatList, Modal, SafeAreaView, TouchableHighlight, View, StyleSheet} from "react-native";
 import Product from "./Product";
 import {useState, useEffect} from "react";
+import {Dimensions} from "react-native";
 
+const {width, height} = Dimensions.get('window');  // om de with en height van elke telefoon te krijgen
 
 
 function ProductList({id, isFilterd, filterdProducts, navigation}) {
     const [showModal, setShowModal] = useState(false);
     const [products, setProducts] = useState(null);
-    const [productData , setProductData] = useState([]);
+    const [productData, setProductData] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -25,7 +27,7 @@ function ProductList({id, isFilterd, filterdProducts, navigation}) {
     }, [])
     useEffect(() => {
         if (products !== null) {
-            if (products.products.length == 0) {
+            if (products.products.length === 0) {
                 alert("Could not get products")
                 return;
             } else {
@@ -35,19 +37,23 @@ function ProductList({id, isFilterd, filterdProducts, navigation}) {
     }, [products]);
 
 
-
     return (
-        <View className={"h-96 pb-10 w-full"}>
+        <View style={styles.container}>
             <SafeAreaView>
-                <View className={""}>
-                    <FlatList className={"h-full pt-5  w-80  pl-0"}
-                              data={isFilterd ? filterdProducts : productData}
-                              numColumns={2}
-                              horizontal={false}
-                              renderItem={({item}) => <TouchableHighlight className={""}><Product
-                                  navigation={navigation}
-                                  price={item.price} category={item.category} img={item.image_url}
-                                  discount={item.discount} title={item.name}/></TouchableHighlight>}
+                <View>
+                    <FlatList
+
+                        data={isFilterd ? filterdProducts : productData}
+                        numColumns={2}
+                        horizontal={false}
+                        renderItem={({item}) =>
+                            <TouchableHighlight style={styles.space}>
+                                <Product
+                                    style={styles.FlatList}
+                                    navigation={navigation}
+                                    price={item.price} category={item.category} img={item.image_url}
+                                    discount={item.discount} title={item.name}/>
+                            </TouchableHighlight>}
                     />
                     <Product/>
                 </View>
@@ -55,5 +61,21 @@ function ProductList({id, isFilterd, filterdProducts, navigation}) {
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        width: width,
+        height: height,
+    },
+    FlatList: {
+        width: width,
+        height: height,
+        alignItems: 'center',
+    },
+    space:{
+        marginRight: 20,
+    },
+})
 
 export default ProductList

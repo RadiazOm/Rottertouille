@@ -1,8 +1,8 @@
-import { FlatList, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import {FlatList, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View} from "react-native";
 import ProductList from "../components/productlist/ProductList";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
-function ProductPage({ route, navigation }) {
+function ProductPage({route, navigation}) {
     const item = route.params.title;
     const id = route.params.id;
     const [inputValue, setInputValue] = useState('');
@@ -27,7 +27,7 @@ function ProductPage({ route, navigation }) {
 
     useEffect(() => {
         if (products !== null) {
-            if (products.length == 0) {
+            if (products.length === 0) {
                 console.log("Product is zero");
                 return;
             } else {
@@ -67,34 +67,39 @@ function ProductPage({ route, navigation }) {
     };
 
     return (
-        <>
-            <View>
-                <View className={" h-36 w-40 ml-7 mt-10"}>
-                    <Text className={"font-bold w-full"}>Zoeken naar product</Text>
-                    <TextInput
-                        onChangeText={handleChange}
-                        className={"border-primaryColor rounded-[100px] border-2 mt-2 w-60 h-10 pl-5 bg-white"}></TextInput>
-                    {showDropdown && (
-                        <View style={styles.Dropdown}>
-                            <FlatList
-                                data={isFilterd ? currentProducts : productData}
-                                numColumns={1}
-                                horizontal={false}
-                                renderItem={({ item }) => (
-                                    <TouchableHighlight onPress={() => setFilteredProducts([item])}>
-                                        <View>
-                                            <Text style={styles.DropdownContent}>{item.name}</Text>
-                                        </View>
-                                    </TouchableHighlight>
-                                )}
-                            />
-                        </View>
-                    )}
-                    <Text className={"font-bold mt-5 text-xl w-full"}>Producten van {item} </Text>
-                    <ProductList isFilterd={isFilterd} filterdProducts={filteredProducts} navigation={navigation} id={id} title={item} />
+
+        <View>
+            <View className={" h-36 w-40 ml-7 mt-10"}>
+                <View style={styles.centeredView}>
+                <TextInput
+                    onChangeText={handleChange}
+                    style={styles.input}
+                    placeholder={"Zoek producten"}
+                />
                 </View>
+                    {showDropdown && (
+                    <View style={styles.Dropdown}>
+                        <FlatList
+                            data={isFilterd ? currentProducts : productData}
+                            numColumns={1}
+                            horizontal={false}
+                            renderItem={({item}) => (
+                                <TouchableHighlight onPress={() => setFilteredProducts([item])}>
+                                    <View>
+                                        <Text style={styles.DropdownContent}>{item.name}</Text>
+                                    </View>
+                                </TouchableHighlight>
+                            )}
+                        />
+                    </View>
+                )}
+                <Text className={"font-bold mt-5 text-xl w-full h-20"}>Producten van {item} </Text>
+                <ProductList
+                    isFilterd={isFilterd} filterdProducts={filteredProducts} navigation={navigation} id={id}
+                    title={item}/>
             </View>
-        </>
+        </View>
+
     );
 }
 
@@ -102,16 +107,39 @@ export default ProductPage;
 
 const styles = StyleSheet.create({
     Dropdown: {
-        backgroundColor: "#222831",
+        backgroundColor: "#fff",
         borderRadius: 5,
-        marginLeft: 15,
+        borderWidth: 1,
+        borderColor:'#F16060',
+        marginLeft: '30%',
+        marginTop: 15,
         shadowRadius: 2,
-        opacity: 20
+        opacity: 20,
+        height: 200,
+        width: 240,
     },
     DropdownContent: {
-        color: "white",
+        color: "#000",
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: "center"
-    }
+    },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    input: {
+        borderWidth: 2,
+        borderRadius: 50,
+        marginTop: 2,
+        marginBottom: 10,
+        marginLeft: '110%',
+        width: 240,
+        height: 40,
+        paddingLeft: 20,
+        backgroundColor: 'white',
+        borderColor: '#F16060',
+    },
 });
