@@ -1,23 +1,21 @@
-import {Text, View, StyleSheet, FlatList, TouchableHighlight, ImageBackground, Button, Pressable} from "react-native";
+import { Text, View, StyleSheet, FlatList, TouchableHighlight, ImageBackground, Button, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import HeaderImage from '../../assets/header-shoppinglist.jpg';
-import {useFocusEffect} from "@react-navigation/native";
-import product from "../components/productlist/Product";
+import { useFocusEffect } from "@react-navigation/native";
 
 function ShoppingListPage({ navigation }) {
     const [products, setProducts] = useState([]);
     const [totalProducts, setTotalProducts] = useState({});
     const [duplicateProducts, setDuplicateProducts] = useState([]);
-    const [counting, setCounting] = useState(totalProducts);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useFocusEffect(
         useCallback(() => {
-            // Code to run when the screen is focused
             const loadProducts = async () => {
                 const stringifiedProducts = await AsyncStorage.getItem("products");
                 const parsedProducts = JSON.parse(stringifiedProducts);
-                if (!parsedProducts || typeof parsedProducts !== 'object') return;
+                if (!parsedProducts || !Array.isArray(parsedProducts)) return;
 
                 setProducts(parsedProducts);
                 countProductNames(parsedProducts);
@@ -25,7 +23,6 @@ function ShoppingListPage({ navigation }) {
 
             loadProducts();
 
-            // Cleanup function to run when the screen is unfocused
             return () => {
                 console.log('Screen is unfocused');
             };
@@ -37,17 +34,38 @@ function ShoppingListPage({ navigation }) {
             await AsyncStorage.removeItem("products");
             setProducts([]);
             setDuplicateProducts([]);
+            setTotalProducts({});
+            setTotalPrice(0);
         } catch (exception) {
             console.log(exception);
         }
     }
 
-    const removeItem = () => {
-        // Remove item logic
+    const removeItem = async (item) => {
+        try {
+            let updatedProducts = [...products];
+            const index = updatedProducts.findIndex(product => product.id === item.id);
+
+            if (index !== -1) {
+                updatedProducts.splice(index, 1);
+                await AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
+                setProducts(updatedProducts);
+                countProductNames(updatedProducts);
+            }
+        } catch (exception) {
+            console.log(exception);
+        }
     }
 
-    const addItem = () => {
-        // Add item logic
+    const addItem = async (item) => {
+        try {
+            const updatedProducts = [...products, { ...item }];
+            await AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
+            setProducts(updatedProducts);
+            countProductNames(updatedProducts);
+        } catch (exception) {
+            console.log(exception);
+        }
     }
 
     const countProductNames = (products) => {
@@ -58,38 +76,40 @@ function ShoppingListPage({ navigation }) {
 
         setTotalProducts(counts);
 
-        // Filter out products that appear more than once
         const duplicates = products.filter((product, index, self) =>
             counts[product.title] > 0 && self.findIndex(p => p.title === product.title) === index
         );
 
         setDuplicateProducts(duplicates);
-    }
 
+        const total = products.reduce((sum, product) => {
+            return sum + product.price;
+        }, 0);
+
+        setTotalPrice(total);
+    }
 
     const renderItem = useMemo(
         () => ({ item }) => (
             <TouchableHighlight>
                 <View style={styles.ShoppingList}>
-                    <View>
+                    <View style={styles.ProductColumn}>
                         <Text>{item.title}</Text>
                     </View>
-                    <View>
+                    <View style={styles.CountColumn}>
                         <Text>{totalProducts[item.title]}</Text>
                     </View>
-                    <View>
-                        <Pressable onPress={addItem} style={styles.AddButton}><Text style={styles.ButtonText}>+</Text></Pressable>
+                    <View style={styles.ButtonColumn}>
+                        <Pressable onPress={() => addItem(item)} style={styles.AddButton}><Text style={styles.ButtonText}>+</Text></Pressable>
+                        <Pressable onPress={() => removeItem(item)} style={styles.RemoveButton}><Text style={styles.ButtonText}>-</Text></Pressable>
                     </View>
-                    <View>
-                        <Pressable onPress={removeItem} style={styles.RemoveButton}><Text style={styles.ButtonText}>-</Text></Pressable>
-                    </View>
-                    <View>
-                        <Text>{item.price}</Text>
+                    <View style={styles.PriceColumn}>
+                        <Text>{(totalProducts[item.title] * item.price).toFixed(2)} €</Text>
                     </View>
                 </View>
             </TouchableHighlight>
         ),
-        [totalProducts] // Recompute only if totalProducts changes
+        [totalProducts]
     );
 
     return (
@@ -97,7 +117,6 @@ function ShoppingListPage({ navigation }) {
             <ImageBackground source={HeaderImage} style={styles.ShoppingListHeader}>
                 <Text style={styles.ShoppingListTitle}>Boodschappenlijst</Text>
             </ImageBackground>
-            <Pressable onPress={removeList}><Text style={styles.ShoppingListDescriptionText}>Verwijder lijst</Text></Pressable>
             <View style={styles.ShoppingListDescription}>
                 <View><Text style={styles.ShoppingListDescriptionText}>Product</Text></View>
                 <View><Text style={styles.ShoppingListDescriptionText}>Aantal</Text></View>
@@ -108,8 +127,14 @@ function ShoppingListPage({ navigation }) {
                       data={duplicateProducts}
                       horizontal={false}
                       renderItem={renderItem}
-                      keyExtractor={item => item.id} // Assuming each product has a unique `id` field
+                      keyExtractor={item => item.id}
             />
+            <View style={styles.TotalPriceContainer}>
+                <Text style={styles.TotalPriceText}>Totale prijs: {totalPrice.toFixed(2)} €</Text>
+            </View>
+            <Pressable style={styles.deleteShoppingList} onPress={removeList}>
+                <Text style={styles.deleteShoppingListText}>Verwijder lijst</Text>
+            </Pressable>
         </View>
     );
 }
@@ -118,61 +143,100 @@ export default ShoppingListPage;
 
 const styles = StyleSheet.create({
     Container: {
-        marginTop:"30%",
+        flex: 1,
+        marginTop: "10%",
+        padding: 10,
+        backgroundColor: "#f8f8f8"
     },
     ShoppingListHeader: {
         width: "100%",
-        paddingTop:"5%",
-        paddingBottom:"5%"
+        height: 150,
+        justifyContent: "center",
+        alignItems: "center"
     },
     ShoppingListTitle: {
-        fontSize:"30%",
-        color:"white",
-        fontWeight:"bold",
-        textAlign:"center"
+        fontSize: 24,
+        color: "white",
+        fontWeight: "bold",
     },
-
     ShoppingListDescription: {
-        marginRight:"auto",
-        paddingTop:"10%",
-        width: "60%",
-        marginLeft:"auto",
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginVertical: 20,
+        paddingHorizontal: 10,
     },
-
     ShoppingListDescriptionText: {
-        fontWeight:"bold"
+        fontWeight: "bold",
+        fontSize: 18
     },
     ShoppingListBackGround: {
-        marginTop:"0%",
-        height:"100%",
+        flex: 1,
     },
     ShoppingList: {
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        width: "60%",
-        marginTop:"10%",
-        marginRight:"auto",
-        marginLeft:"auto",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10,
+        backgroundColor: "white",
+        marginVertical: 5,
+        borderRadius: 5,
+        alignItems: "center",
+    },
+    ProductColumn: {
+        flex: 2,
+        justifyContent: "center",
+    },
+    CountColumn: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    ButtonColumn: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    PriceColumn: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "flex-end",
     },
     AddButton: {
-        backgroundColor:"green",
-        paddingRight:"5%",
-        paddingLeft:"5%",
-        width:"100%"
+        backgroundColor: "green",
+        padding: 5,
+        borderRadius: 5,
+        marginHorizontal: 2,
     },
-    RemoveButton:{
-        backgroundColor:"red",
-        paddingRight:"5%",
-        paddingLeft:"5%",
-        width:"100%"
+    RemoveButton: {
+        backgroundColor: "red",
+        padding: 5,
+        borderRadius: 5,
+        marginHorizontal: 2,
     },
     ButtonText: {
-        textAlign:"center",
-        fontSize:"23%",
-        fontWeight:"bold"
+        color: "white",
+        fontWeight: "bold",
+    },
+    deleteShoppingList: {
+        backgroundColor: "red",
+        padding: 10,
+        borderRadius: 5,
+        alignItems: "center",
+        marginTop: 20,
+    },
+    deleteShoppingListText: {
+        color: "white",
+        fontWeight: "bold",
+    },
+    TotalPriceContainer: {
+        padding: 10,
+        backgroundColor: "white",
+        borderRadius: 5,
+        alignItems: "center",
+        marginTop: 20,
+    },
+    TotalPriceText: {
+        fontWeight: "bold",
+        fontSize: 18,
     }
 });
