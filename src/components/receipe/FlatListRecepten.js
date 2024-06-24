@@ -7,9 +7,10 @@ import {
     StatusBar,
     StyleSheet,
     TouchableOpacity,
-    Image, Text, View
+    Image,
+    Text,
+    View
 } from 'react-native';
-
 
 function FlatListRecepten({navigation})  {
 
@@ -96,7 +97,6 @@ function FlatListRecepten({navigation})  {
         )
     };
 
-
     return (
         <SafeAreaView className={"flex flex-col bg-red-200"}>
             <View style={styles.header}>
@@ -117,34 +117,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: StatusBar.currentHeight || 10,
-
     },
-
     Recepten:{
-        marginTop:5,
         fontSize: 16,
         fontWeight: 'bold',
         color: 'gray',
     },
-
     item: {
         padding: 10,
         marginVertical: 8,
         marginHorizontal: 1,
     },
-
-
     image: {
-        width: 135,
-        height: 135,
+        width: 160,
+        height: 160,
         borderRadius: 10
     },
-
     header: {
         marginLeft: 15,
-        marginTop:60
+        marginTop:'10%',
     }
-
 });
 
 export default FlatListRecepten;

@@ -1,9 +1,21 @@
 import React from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Button, Pressable, Alert} from "react-native";
 import image from '../../../assets/recepten.jpeg';
+import {useRoute} from "@react-navigation/native";
 
 
 
+const ReceptDetails = ({navigation}) => {
+    const route = useRoute();
+    const { item } = route.params; // Haal het item op uit de route params
+
+    if (!item) {
+        return (
+            <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>Geen item gegevens gevonden</Text>
+            </View>
+        );
+    }
 const ReceptDetails = ({route}) => {
 
     const groceries = [
@@ -43,7 +55,7 @@ const ReceptDetails = ({route}) => {
     console.log(recipe)
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.background}>
             <Image source={{ uri : recipe.image_url}} style={styles.receiptImage} />
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
@@ -66,9 +78,7 @@ const ReceptDetails = ({route}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => {
-                        console.log('You tapped the button!');
-                    }}
+                    onPress={() => navigation.navigate('InstructionRecipe',{item: item})}
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
@@ -76,9 +86,7 @@ const ReceptDetails = ({route}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button2}
-                    onPress={() => {
-                        console.log('You tapped the button!');
-                    }}
+                    onPress={() => console.log('Voeg toe aan lijst button ingedrukt')}
                 >
                     <Text style={styles.buttonText2}>Voeg toe aan lijst</Text>
                 </Pressable>
@@ -95,8 +103,10 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "bold",
+        color: "gray",
+        marginLeft: '10%',
     },
     receiptImage: {
         width: "100%",
@@ -166,6 +176,18 @@ const styles = StyleSheet.create({
     buttonText2: {
         color: '#fff',
         fontWeight: 'bold',
+    },
+    background: {
+        backgroundColor: '#fff',
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    errorText: {
+        fontSize: 18,
+        color: 'red',
     },
 });
 

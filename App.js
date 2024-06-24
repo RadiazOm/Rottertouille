@@ -6,7 +6,7 @@ import AllRecepten from "./src/components/receipe/AllRecepten";
 import {StyleSheet, Image} from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import ProductPage from "./src/pages/ProductPage";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import ShoppingListPage from "./src/pages/ShoppingListPage";
 import * as SplashScreen from 'expo-splash-screen';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -17,6 +17,7 @@ import Location from './assets/location.png';
 import Home from './assets/home-icon.png';
 import ShoppingList from './assets/Shoppingcart.png';
 import Profile from './assets/user-icon.png';
+import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -25,58 +26,59 @@ export default function App() {
 
     // setTimeout(SplashScreen.hideAsync, 2000);
     useEffect(() => {
-        setTimeout(()=> {
+        setTimeout(() => {
             SplashScreen.hideAsync();
         }, 2000)
-    }, );
+    },);
 
     return (
         <>
-        <NavigationContainer>
-            <Tab.Navigator screenOptions={{ tabBarShowLabel:false, headerShown:false}}>
-                <Tab.Screen
-                    name="HomeStack"
-                    options={{
-                        tabBarIcon: ({size, focused, color}) => {
-                            return (
-                                <Image style={styles.navigationItem} source={Home}/>
-                            )
-                        }
-                    }}
-                    component={HomeScreenNavigator}
-                />
-                <Tab.Screen name={"Location"}
-                            options={{
-                                tabBarIcon: ({size, focused, color}) => {
-                                    return (
-                                        <Image style={styles.navigationItem} source={Location}/>
-                                    )
-                                }
-                            }}
-                            component={LocationPage}
-                            />
-                <Tab.Screen
-                    name={"ShoppingList"}
-                    options={{
-                        tabBarIcon: ({size, focused, color}) => {
-                            return (
-                                <Image style={styles.navigationItem} source={ShoppingList}/>
-                            )
-                        }
-                    }}
-                    component={ShoppingListPage} />
-                <Tab.Screen
-                    name={"Profile"}
-                    options={{
-                        tabBarIcon: ({size, focused, color}) => {
-                            return (
-                                <Image style={styles.navigationItem} source={Profile}/>
-                            )
-                        }
-                    }}
-                    component={ProfilePage} />
-            </Tab.Navigator>
-        </NavigationContainer>
+            <NavigationContainer>
+                <Tab.Navigator screenOptions={{tabBarShowLabel: false, headerShown: false}}>
+                    <Tab.Screen
+                        name="HomeTab"
+                        options={{
+                            tabBarIcon: ({size, focused, color}) => {
+                                return (
+                                    <Image style={styles.navigationItem} source={Home}/>
+                                )
+                            }
+                        }}
+                        component={HomeScreenNavigator}
+                    />
+                    <Tab.Screen
+                        name={"Location"}
+                        options={{
+                            tabBarIcon: ({size, focused, color}) => {
+                                return (
+                                    <Image style={styles.navigationItem} source={Location}/>
+                                )
+                            }
+                        }}
+                        component={LocationPage}
+                    />
+                    <Tab.Screen
+                        name={"ShoppingList"}
+                        options={{
+                            tabBarIcon: ({size, focused, color}) => {
+                                return (
+                                    <Image style={styles.navigationItem} source={ShoppingList}/>
+                                )
+                            }
+                        }}
+                        component={ShoppingListPage}/>
+                    <Tab.Screen
+                        name={"Profile"}
+                        options={{
+                            tabBarIcon: ({size, focused, color}) => {
+                                return (
+                                    <Image style={styles.navigationItem} source={Profile}/>
+                                )
+                            }
+                        }}
+                        component={ProfilePage}/>
+                </Tab.Navigator>
+            </NavigationContainer>
         </>
     );
 }
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     navigationItem: {
-        width:35,
-        height:35
+        width: 35,
+        height: 35
     }
 });
