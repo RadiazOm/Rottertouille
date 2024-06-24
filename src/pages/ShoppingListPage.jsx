@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     deleteShoppingList: {
-        backgroundColor: "red",
+        backgroundColor: '#F16060',
         padding: 10,
         borderRadius: 5,
         alignItems: "center",
