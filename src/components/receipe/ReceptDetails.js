@@ -5,7 +5,7 @@ import {useRoute} from "@react-navigation/native";
 
 
 
-const ReceptDetails = ({route}) => {
+const ReceptDetails = ({route, navigation}) => {
 
     const groceries = [
         {
@@ -67,7 +67,7 @@ const ReceptDetails = ({route}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => navigation.navigate('InstructionRecipe',{item: item})}
+                    onPress={() => navigation.navigate('InstructionRecipe',{item: recipe})}
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
