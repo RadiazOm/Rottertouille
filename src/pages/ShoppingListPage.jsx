@@ -44,7 +44,7 @@ function ShoppingListPage({ navigation }) {
     const removeItem = async (item) => {
         try {
             let updatedProducts = [...products];
-            const index = updatedProducts.findIndex(product => product.id === item.id);
+            const index = updatedProducts.indexOf(item);
 
             if (index !== -1) {
                 updatedProducts.splice(index, 1);
