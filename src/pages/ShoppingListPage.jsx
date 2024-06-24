@@ -60,7 +60,7 @@ function ShoppingListPage({ navigation }) {
 
         // Filter out products that appear more than once
         const duplicates = products.filter((product, index, self) =>
-            counts[product.title] > 1 && self.findIndex(p => p.title === product.title) === index
+            counts[product.title] > 0 && self.findIndex(p => p.title === product.title) === index
         );
 
         setDuplicateProducts(duplicates);
