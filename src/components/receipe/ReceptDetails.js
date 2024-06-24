@@ -4,7 +4,7 @@ import image from '../../../assets/recepten.jpeg';
 
 
 
-const ReceptDetails = () => {
+const ReceptDetails = ({route}) => {
 
     const groceries = [
         {
@@ -37,20 +37,27 @@ const ReceptDetails = () => {
             price2: '€4,00'
         },
     ];
+
+    const {recipe} = route.params 
+
+    console.log(recipe)
+
     return (
         <ScrollView>
-            <Image source={image} style={styles.receiptImage} />
+            <Image source={{ uri : recipe.image_url}} style={styles.receiptImage} />
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
             </View>
             <View style={styles.divider} />
             <View style={styles.groceryList}>
-                {groceries.map((grocery, index) => (
+                {recipe.ingredients.map((ingredient, index) => (
                     <View key={index} style={styles.groceryItem}>
-                        <Text style={styles.groceryName}>{grocery.name}</Text>
+                        <View>
+                            <Image source={{ uri : recipe.image_url}}/>
+                            <Text style={styles.groceryName}>{ingredient.name}</Text>
+                        </View>
                         <View style={styles.priceContainer}>
-                            <Text style={styles.oldPrice}>{grocery.price}</Text>
-                            <Text style={styles.newPrice}>{grocery.price2}</Text>
+                            <Text style={styles.newPrice}>{ingredient.price}</Text>
                         </View>
                     </View>
                 ))}

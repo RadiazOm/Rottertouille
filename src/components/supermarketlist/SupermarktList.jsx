@@ -35,8 +35,6 @@ const SuperMarktList = ({navigation}) => {
     }, []);
 
     const supermarkets = data.map((x) => (x));
-    console.log(supermarkets);
-
 
     function toggleDropDown() {
         setDisplayFilter(!displayFilter);
@@ -80,7 +78,6 @@ const SuperMarktList = ({navigation}) => {
                       renderItem={({item}) => <TouchableHighlight className={""}
                                                                   onPress={() => navigation.navigate('SupermarketProducts', {title: item.name, id: item._id, img:item.image_url})}><Supermarkt
                           img={item.image_url}/></TouchableHighlight>}
-                      keyExtractor={item => item.id}
             />
         </SafeAreaView>
     );

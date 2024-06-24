@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import receptenImage from '../../../assets/recepten.jpeg'
 import moreButton from '../../../assets/morebutton.png'
 import {
@@ -56,16 +56,22 @@ function FlatListRecepten({navigation})  {
         }
     ];
 
+    const [recipes, setRecipes] = useState()
+
+    useEffect(() => {
+        fetch('http://89.33.85.29:1068/recipes')
+            .then(response => response.json())
+            .then((data) => {setRecipes(data.recipes)}
+        );
+    }, [])
+
 
     const [selectedId, setSelectedId] = useState();
 
     const renderItem = ({item}) => {
         const navigateToDetail = () => {
-            if (item.id !== '8') {
-                navigation.navigate('ReceptenDetail', {itemId: item.id});
-            } else {
-                navigation.navigate('AllRecepten'); // Navigate to a different component for "More"
-            }
+                navigation.navigate('ReceptenDetail', {recipe: item});
+                // navigation.navigate('AllRecepten'); // Navigate to a different component for "More"
         };
         return (
             <View>
@@ -75,12 +81,15 @@ function FlatListRecepten({navigation})  {
     };
 
     const Item = ({item, onPress, backgroundColor,}) => {
+
+        console.log(item)
+
         return (
             <View>
             <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
                 <Image
                     style={styles.image}
-                    source={item.img}
+                    source={{ uri : item.image_url}}
                 />
             </TouchableOpacity>
             </View>
@@ -94,9 +103,9 @@ function FlatListRecepten({navigation})  {
                 <Text style={styles.Recepten}>Recepten</Text>
             </View>
             <FlatList
-                data={DATA}
+                data={recipes}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item}
                 extraData={selectedId}
                 horizontal={true}
             />
