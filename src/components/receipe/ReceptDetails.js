@@ -2,7 +2,8 @@ import React from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Button, Pressable, Alert} from "react-native";
 import image from '../../../assets/recepten.jpeg';
 import {useRoute} from "@react-navigation/native";
-
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const ReceptDetails = ({route, navigation}) => {
@@ -38,23 +39,44 @@ const ReceptDetails = ({route, navigation}) => {
             price2: '€4,00'
         },
     ];
+    const {recipe} = route.params
 
-    const {recipe} = route.params 
+    async function storeProductsAsync() {
+        for (const product of recipe.ingredients) {
+            const objectIngredient = {
+                title: product.name,
+                price: product.price,
+                discount: product?.discount?.discount || ""
+            }
+            try {
+                let storage = await AsyncStorage.getItem("products")
+                let parsedList = JSON.parse(storage)
+                if (storage == null) {
+                    parsedList = []
+                }
+                parsedList.push(objectIngredient);
+                let stringifiedList = JSON.stringify(parsedList);
+                await AsyncStorage.setItem("products", stringifiedList)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
     console.log(recipe)
 
     return (
         <ScrollView style={styles.background}>
-            <Image source={{ uri : recipe.image_url}} style={styles.receiptImage} />
+            <Image source={{uri: recipe.image_url}} style={styles.receiptImage}/>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Recept lijst</Text>
             </View>
-            <View style={styles.divider} />
+            <View style={styles.divider}/>
             <View style={styles.groceryList}>
                 {recipe.ingredients.map((ingredient, index) => (
                     <View key={index} style={styles.groceryItem}>
                         <View>
-                            <Image source={{ uri : recipe.image_url}}/>
+                            <Image source={{uri: recipe.image_url}}/>
                             <Text style={styles.groceryName}>{ingredient.name}</Text>
                         </View>
                         <View style={styles.priceContainer}>
@@ -63,11 +85,11 @@ const ReceptDetails = ({route, navigation}) => {
                     </View>
                 ))}
             </View>
-            <View style={styles.divider} />
+            <View style={styles.divider}/>
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button1}
-                    onPress={() => navigation.navigate('InstructionRecipe',{item: recipe})}
+                    onPress={() => navigation.navigate('InstructionRecipe', {item: item})}
                 >
                     <Text style={styles.buttonText1}>Instructies</Text>
                 </Pressable>
@@ -75,7 +97,7 @@ const ReceptDetails = ({route, navigation}) => {
             <View style={styles.buttonContainer}>
                 <Pressable
                     style={styles.button2}
-                    onPress={() => console.log('Voeg toe aan lijst button ingedrukt')}
+                    onPress={storeProductsAsync}
                 >
                     <Text style={styles.buttonText2}>Voeg toe aan lijst</Text>
                 </Pressable>
