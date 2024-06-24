@@ -6,7 +6,7 @@ import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncSto
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const ReceptDetails = ({route}) => {
+const ReceptDetails = ({route, navigation}) => {
 
     const groceries = [
         {
