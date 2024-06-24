@@ -5,17 +5,6 @@ import {useRoute} from "@react-navigation/native";
 
 
 
-const ReceptDetails = ({navigation}) => {
-    const route = useRoute();
-    const { item } = route.params; // Haal het item op uit de route params
-
-    if (!item) {
-        return (
-            <View style={styles.errorContainer}>
-                <Text style={styles.errorText}>Geen item gegevens gevonden</Text>
-            </View>
-        );
-    }
 const ReceptDetails = ({route}) => {
 
     const groceries = [
@@ -191,4 +180,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ReceptDetails;
+export default ReceptDetails
