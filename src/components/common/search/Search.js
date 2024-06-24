@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     },
     searchIcon: {
         position: 'absolute',
-        left: 20,
-        top: 21,
+        left: '6%',
+        top: '35%',
     },
     input: {
         flex: 1,

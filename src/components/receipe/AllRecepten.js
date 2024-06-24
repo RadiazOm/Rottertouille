@@ -95,6 +95,7 @@ const AllRecepten = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
             <Search style={styles.searchbar}/>
             <FlatList style={styles.flatList}
                       data={receptenData}
@@ -102,6 +103,7 @@ const AllRecepten = ({navigation}) => {
                       renderItem={renderItem}
                       numColumns={2}
             />
+            </View>
         </SafeAreaView>
     );
 };
@@ -110,10 +112,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    header: {
+        marginTop: '15%',
+    },
 
     itemContainer: {
         flex: 1,
-        marginBottom:20,
+        marginBottom:15,
         justifyContent: "center",
         alignItems: "center",
         width: "50%",
@@ -128,12 +133,8 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 10,
     },
-    searchbar: {
-        margin: 15,
-    },
-
     flatList: {
-        marginTop: 70,
+        marginTop: 60,
         margin:10
     }
 });

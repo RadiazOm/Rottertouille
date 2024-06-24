@@ -1,6 +1,9 @@
-import {Button, Image, Text, View} from "react-native";
+import {Button, Image, Text, View, StyleSheet,} from "react-native";
 import ProductImage from '../../../assets/brood.jpg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Dimensions} from "react-native";
+
+const {width, height} = Dimensions.get('window');
 
 const Product = ({title, price, discount, img}) => {
     const newPrice = price - discount;
@@ -34,20 +37,51 @@ const Product = ({title, price, discount, img}) => {
 
     return (
         <>
-            <View className={"mt-3  mr-2 pl-5 pr-5 h-28"}>
-                <Image className={"rounded h-28 w-28"} source={{uri: img}}/>
+            <View style={styles.container}>
+                <Image style={styles.image} source={{uri: img}}/>
             </View>
-            <View className={"flex w-full m-2 flex-col"}>
-                <Text className={"w-40"}>{title}</Text>
-                <Text className={"flex-row"}>€ {Math.round(newPrice * 100) / 100}</Text>
-                <View className={"flex"}>
+            <View style={styles.flex}>
+                <Text style={styles.text}>{title}</Text>
+                <Text style={styles.flex}>€ {Math.round(newPrice * 100) / 100}</Text>
+                <View style={styles.flex}>
                     <Button onPress={storeProductsAsync} title={"Add to list"}
-                            classname={"w-20 bg-primaryColor h-20"}></Button>
-                    <Text>{discount}</Text>
+                            style={styles.button}></Button>
+                    <View>
+                        <Text>{discount}</Text>
+                    </View>
                 </View>
             </View>
         </>
     )
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    image: {
+        borderRadius: 5,
+        height: 130,
+        width: 140,
+        marginTop: 10,
+    },
+    flex: {
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+
+
+    },
+    text: {
+        width: 160,
+        textAlign: 'center',
+        height: height/ 16,
+    },
+    button: {
+        margin: 10,
+    },
+});
 export default Product;
