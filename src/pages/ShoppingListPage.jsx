@@ -127,7 +127,6 @@ function ShoppingListPage({ navigation }) {
                       data={duplicateProducts}
                       horizontal={false}
                       renderItem={renderItem}
-                      keyExtractor={item => item.id}
             />
             <View style={styles.TotalPriceContainer}>
                 <Text style={styles.TotalPriceText}>Totale prijs: {totalPrice.toFixed(2)} €</Text>
