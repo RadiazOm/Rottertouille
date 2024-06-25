@@ -202,13 +202,13 @@ const styles = StyleSheet.create({
     },
     AddButton: {
         backgroundColor: "green",
-        padding: 5,
+        padding: 10,
         borderRadius: 5,
         marginHorizontal: 2,
     },
     RemoveButton: {
         backgroundColor: "red",
-        padding: 5,
+        padding: 10,
         borderRadius: 5,
         marginHorizontal: 2,
     },

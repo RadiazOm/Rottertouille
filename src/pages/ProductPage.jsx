@@ -64,6 +64,7 @@ function ProductPage({route, navigation}) {
                 });
                 const data = await response.json();
                 setCurrentProducts(data.products);
+                setFilteredProducts(data.products)
             } catch (error) {
                 console.log(error);
             }
@@ -82,22 +83,20 @@ function ProductPage({route, navigation}) {
                     placeholder={"Zoek producten"}
                 />
                 </View>
-                    {showDropdown && (
-                    <View style={styles.Dropdown}>
-                        <FlatList
-                            data={isFilterd ? currentProducts : productData}
-                            numColumns={1}
-                            horizontal={false}
-                            renderItem={({item}) => (
-                                <TouchableHighlight onPress={() => setFilteredProducts([item])}>
-                                    <View>
-                                        <Text style={styles.DropdownContent}>{item.name}</Text>
-                                    </View>
-                                </TouchableHighlight>
-                            )}
-                        />
-                    </View>
-                )}
+                {/*    {showDropdown && (*/}
+                {/*    <View style={styles.Dropdown}>*/}
+                {/*        <FlatList*/}
+                {/*            data={isFilterd ? currentProducts : productData}*/}
+                {/*            numColumns={1}*/}
+                {/*            horizontal={false}*/}
+                {/*            renderItem={({item}) => (*/}
+                {/*                    <View>*/}
+                {/*                        <Text style={styles.DropdownContent}>{item.name}</Text>*/}
+                {/*                    </View>*/}
+                {/*            )}*/}
+                {/*        />*/}
+                {/*    </View>*/}
+                {/*)}*/}
                 <Text className={"font-bold mt-5 text-xl w-full h-20"}>Producten van {item} </Text>
                 <ProductList
                     isFilterd={isFilterd} filterdProducts={filteredProducts} navigation={navigation} id={id}

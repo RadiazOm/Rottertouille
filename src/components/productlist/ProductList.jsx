@@ -52,7 +52,7 @@ function ProductList({id, isFilterd, filterdProducts, navigation}) {
                                     style={styles.FlatList}
                                     navigation={navigation}
                                     price={item.price} category={item.category} img={item.image_url}
-                                    discount={item.discount} title={item.name}/>
+                                    discount={item.discount?.discount} title={item.name}/>
                             </TouchableHighlight>}
                     />
                     <Product/>

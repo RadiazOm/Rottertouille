@@ -2,6 +2,7 @@ import {Button, Image, Text, View, StyleSheet,} from "react-native";
 import ProductImage from '../../../assets/brood.jpg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Dimensions} from "react-native";
+import React from "react";
 
 const {width, height} = Dimensions.get('window');
 
@@ -42,13 +43,13 @@ const Product = ({title, price, discount, img}) => {
             </View>
             <View style={styles.flex}>
                 <Text style={styles.text}>{title}</Text>
-                <Text style={styles.flex}>€ {Math.round(newPrice * 100) / 100}</Text>
+                <Text style={discount ? {textDecorationLine: 'line-through', textDecorationStyle: 'solid'} : ''}>€ {discount ? (parseFloat(discount) + parseFloat(price)).toFixed(2) : price}</Text>
+                <View>
+                    <Text>{discount ? '€' + price : ''}</Text>
+                </View>
                 <View style={styles.flex}>
                     <Button onPress={storeProductsAsync} title={"Voeg toe aan lijst"}
                             style={styles.button}></Button>
-                    <View>
-                        <Text>{discount}</Text>
-                    </View>
                 </View>
             </View>
         </>
