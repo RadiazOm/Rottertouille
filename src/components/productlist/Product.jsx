@@ -44,7 +44,7 @@ const Product = ({title, price, discount, img}) => {
                 <Text style={styles.text}>{title}</Text>
                 <Text style={styles.flex}>€ {Math.round(newPrice * 100) / 100}</Text>
                 <View style={styles.flex}>
-                    <Button onPress={storeProductsAsync} title={"Add to list"}
+                    <Button onPress={storeProductsAsync} title={"Voeg toe aan lijst"}
                             style={styles.button}></Button>
                     <View>
                         <Text>{discount}</Text>
