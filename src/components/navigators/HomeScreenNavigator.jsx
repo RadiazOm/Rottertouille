@@ -16,7 +16,7 @@ const HomeScreenNavigator = () => {
             <Stack.Navigator>
                 <Stack.Screen name={"Home"} component={HomePage}/>
                 <Stack.Screen name={"SupermarketProducts"} component={ProductPage}/>
-                <Stack.Screen name={"ReceptenDetail"} component={ReceptDetails}/>
+                <Stack.Screen name={"ReceptenDetail"} component={ReceptDetails} options={({ route }) => ({ title: route.params.recipe.name })}/>
                 <Stack.Screen name={"AllRecepten"} component={AllRecepten}/>
                 <Stack.Screen name={'InstructionRecipe'} component={InstructionRecipe}/>
             </Stack.Navigator>
