@@ -12,6 +12,7 @@ function ProductPage({route, navigation}) {
     const [productData, setProductData] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [products, setProducts] = useState(null);
+    let timeoutref;
 
     useEffect(() => {
         (async () => {
@@ -37,33 +38,37 @@ function ProductPage({route, navigation}) {
     }, [products]);
 
     const handleChange = async (text) => {
-        setInputValue(text);
+        clearTimeout(timeoutref)
+        timeoutref = setTimeout(async () => {
+            setInputValue(text);
 
-        if (text === "") {
-            setShowDropdown(false);
-            setIsFiltered(false);
-            setCurrentProducts([]);
-            return;
-        }
+            if (text === "") {
+                setShowDropdown(false);
+                setIsFiltered(false);
+                setCurrentProducts([]);
+                return;
+            }
 
-        setShowDropdown(true);
-        setIsFiltered(true);
+            setShowDropdown(true);
+            setIsFiltered(true);
 
-        try {
-            const response = await fetch("http://89.33.85.29:1068/products/search/" + id, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": text
-                })
-            });
-            const data = await response.json();
-            setCurrentProducts(data.products);
-        } catch (error) {
-            console.log(error);
-        }
+            try {
+                const response = await fetch("http://89.33.85.29:1068/products/search/" + id, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "query": text
+                    })
+                });
+                const data = await response.json();
+                setCurrentProducts(data.products);
+            } catch (error) {
+                console.log(error);
+            }
+        }, 1000)
+
     };
 
     return (
